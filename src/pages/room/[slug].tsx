@@ -1,5 +1,6 @@
-import { Flex, useDisclosure } from "@chakra-ui/react";
+import { Button, Flex, SlideFade, useDisclosure } from "@chakra-ui/react";
 import Head from "next/head";
+import { useState } from "react";
 import { Characters } from "../../components/Characters";
 import CharacterSheetModal from "../../components/CharacterSheetModal";
 
@@ -12,17 +13,16 @@ export default function Room(){
         {/* <title>{`Room-${roomId} | Drakest`}</title> */}
       </Head>
 
-      <CharacterSheetModal 
+      <CharacterSheetModal
         isOpen={isOpen} 
-        onClose={onClose} 
-        scrollBehavior="inside"
+        onRequestClose={onClose}
       />
-
+      
       <Flex w="100%" mx="auto">
         <Flex flex="1">
         </Flex>
         <Flex align="center" w="100%" h="100vh" ml="auto" maxW="400px">
-          <Characters />
+          <Characters openCharacterSheet={onOpen} />
         </Flex>
       </Flex>
     </>
