@@ -1,4 +1,3 @@
-
 import { Box, Image } from '@chakra-ui/react';
 import ReactModal from 'react-modal';
 import Footer from './Footer';
@@ -11,12 +10,13 @@ interface ModalProps{
   onRequestClose: () => void
 }
 
-function CharacterSheetModal({
+export function CharacterSheetModal({
   isOpen,
   onRequestClose,
 }: ModalProps) {
   return (
     <ReactModal
+      ariaHideApp={false}
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       style={{
@@ -39,5 +39,3 @@ function CharacterSheetModal({
     </ReactModal>
   );
 }
-
-export default CharacterSheetModal;

@@ -7,6 +7,7 @@ import Head from 'next/head'
 import Header from '../components/Header'
 import { Input } from '../components/Form/Input'
 import { Form } from '../components/Form'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 export default function Home() {
   const toast = useToast()

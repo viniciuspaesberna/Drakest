@@ -1,33 +1,57 @@
-import { Link, Stack } from '@chakra-ui/react';
-import React from 'react';
+import { Avatar, Button, Flex, Text } from '@chakra-ui/react';
+import { FcGoogle } from 'react-icons/fc'
+import { CgClose } from 'react-icons/cg';
+import { signIn, signOut, useSession } from 'next-auth/client'
+import Link from 'next/link'
 
 // import { Container } from './styles';
 
-const LoginSection: React.FC = () => {
-  return (
-    <Stack direction="row" spacing="8">
-      <Link 
-        fontSize="2xl"
-        p="4"
-        borderRadius="full"
-        _hover={{
-        color: "yellow.400",
-        bg: "gray.900"
-      }}>
-        Cadastrar-se
+function LoginSection() {
+  const [session] = useSession()
+
+  return session ? (
+    <Flex align="center">
+      <Link href="/profile">
+        <Avatar
+          size="md"
+          mr="2" 
+          _hover={{
+            cursor: 'pointer'
+          }}
+          src={session.user.image}
+          name={session.user.name}
+        />
       </Link>
-      <Link 
-        fontSize="2xl"
-        p="4"
-        borderRadius="full"
+      <Button
+        onClick={() => signOut()}
+        p={0}
+        bg="whiteAlpha.900"
         _hover={{
-        color: "yellow.400",
-        bg: "gray.900"
-      }}>
-        Login
-      </Link>
-    </Stack>
-  );
+          bgColor: 'whiteAlpha.600',
+        }}
+        color="gray.900"
+      >
+        <Flex align="center" p="2">
+          {session && <Text mx="2">{session.user.name}</Text>}
+          <CgClose size="20" />
+        </Flex>
+      </Button>
+    </Flex>
+  ) : (
+    <Button
+      onClick={() => signIn('google')}
+      p={0}
+      bg="whiteAlpha.900"
+      _hover={{
+        bgColor: 'whiteAlpha.600',
+      }}
+      color="gray.900"
+    >
+      <Flex align="center" p="2">
+        <FcGoogle size="28" />
+      </Flex>
+    </Button>
+  )
 }
 
 export default LoginSection;
