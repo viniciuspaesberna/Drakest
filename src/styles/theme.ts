@@ -1,6 +1,6 @@
-import { extendTheme } from '@chakra-ui/react' 
+import { ChakraTheme, extendTheme } from '@chakra-ui/react' 
 
-export const theme = extendTheme({
+export const theme: ChakraTheme = extendTheme({
   styles: {
     colors: {
       gray: {

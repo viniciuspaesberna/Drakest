@@ -2,7 +2,7 @@ import { FormEvent, useRef } from 'react'
 import { useRouter } from 'next/router'
 
 import { FiHelpCircle } from 'react-icons/fi'
-import { Flex, Image, Stack, useToast} from '@chakra-ui/react'
+import { Flex, Image, Stack, useBreakpointValue, useToast} from '@chakra-ui/react'
 import Head from 'next/head'
 import Header from '../components/Header'
 import { Input } from '../components/Form/Input'
@@ -49,11 +49,12 @@ export default function Home() {
       <Header />
       
       <Flex as="main" align="center" flexDir="column" justify="center" m="auto">
-        <Image src="/bg.svg" mt="-10rem"/>
+        <Image src="/bg.svg" scale="4" mt={["-8rem","-5rem"]}/>
 
         <Stack 
-          direction="row"
-          spacing="20rem"
+          direction={['column', "row"]}
+          spacing={['5rem', "15rem"]}
+          mt={["-2rem", "2rem"]}
         >
           <Form
             submitAction={handleCreateRoom}
