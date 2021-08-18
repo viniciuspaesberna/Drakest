@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { Flex, useDisclosure } from "@chakra-ui/react";
 
-import { Characters } from "../../components/room";
+import { Characters } from "../../components/room/Characters";
 import { CharacterSheetModal } from "../../components/room/CharacterSheetModal";
 import { DicesSection } from "../../components/room/DicesSection";
 

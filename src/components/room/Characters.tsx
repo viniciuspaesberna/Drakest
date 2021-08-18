@@ -1,6 +1,6 @@
 import { Avatar, Flex, IconButton, Stack, Text } from "@chakra-ui/react";
 import { BsFileText } from 'react-icons/bs'
-import { Input } from "../../geral/Form/Input";
+import { Input } from "../geral/Form/Input";
 
 interface CharactersProps{
   openCharacterSheet: () => void
