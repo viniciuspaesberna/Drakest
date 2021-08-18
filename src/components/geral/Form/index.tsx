@@ -27,7 +27,7 @@ const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> =
           })}
           onMouseLeave={() => toast.closeAll()}
           ml="2" 
-          color="blue.400" 
+          color="blue.600" 
           as={icon} />}
       </Heading>
 
@@ -40,6 +40,7 @@ const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> =
         type="submit"
         mt="4"
         colorScheme="yellow"
+        color="gray.800"
       >
         {submitButtonName}
       </Button>

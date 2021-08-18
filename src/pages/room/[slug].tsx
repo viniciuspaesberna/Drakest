@@ -2,9 +2,9 @@ import Head from "next/head";
 
 import { Flex, useDisclosure } from "@chakra-ui/react";
 
-import { Characters } from "../../components/Characters";
-import { CharacterSheetModal } from "../../components/CharacterSheetModal";
-import { DicesSection } from "../../components/DicesSection";
+import { Characters } from "../../components/room";
+import { CharacterSheetModal } from "../../components/room/CharacterSheetModal";
+import { DicesSection } from "../../components/room/DicesSection";
 
 export default function Room(){
   const { isOpen, onOpen, onClose } = useDisclosure()
