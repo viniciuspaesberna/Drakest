@@ -15,7 +15,6 @@ import { api } from '../services/api'
 export default function Home() {
   const toast = useToast()
   const router = useRouter()
-  const [session] = useSession()
 
   const enterRoomFormRef = useRef<HTMLFormElement>(null)
   const enterRoomInputRef = useRef<HTMLInputElement>(null)

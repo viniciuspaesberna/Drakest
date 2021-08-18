@@ -5,6 +5,8 @@ import { Flex, useDisclosure } from "@chakra-ui/react";
 import { Characters } from "../../components/room/Characters";
 import { CharacterSheetModal } from "../../components/room/CharacterSheetModal";
 import { DicesSection } from "../../components/room/DicesSection";
+import { getSession } from "next-auth/client";
+import { GetServerSideProps } from "next";
 
 export default function Room(){
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -41,3 +43,23 @@ export default function Room(){
   )
 }
 
+export const getServerSideProps: GetServerSideProps = async ({req}) => {
+  const session = await getSession({req}) 
+
+  if(!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+  }
+
+  const user = session.user
+
+  return {
+    props: {
+      user
+    }
+  }
+}

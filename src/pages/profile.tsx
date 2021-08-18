@@ -2,6 +2,7 @@ import Head from "next/head";
 import { getSession, useSession } from "next-auth/client";
 import { Flex } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { AsideProfile } from "../components/profile/aside";
 
 export default function Profile({user}){
   return (
@@ -11,7 +12,7 @@ export default function Profile({user}){
       </Head>
 
       <Flex as="main">
-
+        <AsideProfile />
       </Flex>
     </>
   )
