@@ -2,14 +2,21 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/client";
 import Head from "next/head";
 
-import { Flex, Text, useDisclosure } from "@chakra-ui/react";
+import { Flex, useDisclosure } from "@chakra-ui/react";
 
 import { Characters } from "../../components/room/Characters";
 import { CharacterSheetModal } from "../../components/room/CharacterSheetModal";
 import { DicesSection } from "../../components/room/DicesSection";
+import { Loading } from "../../components/geral/Loading";
+import { useLoding } from "../../hooks/useLoding";
 
 export default function Room({user, roomId}){
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const {isLoading} = useLoding()
+
+  if(isLoading){    
+    return <Loading />;
+  }
 
   return(
     <>

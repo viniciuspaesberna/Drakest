@@ -2,9 +2,18 @@ import Head from "next/head";
 import { getSession } from "next-auth/client";
 import { Flex, Text } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+
 import { AsideProfile } from "../components/profile/aside";
+import { Loading } from "../components/geral/Loading";
+import { useLoding } from "../hooks/useLoding";
 
 export default function Profile({user}){
+  const { isLoading } = useLoding()
+
+  if(isLoading){    
+    return <Loading />;
+  }
+
   return (
     <>
       <Head>

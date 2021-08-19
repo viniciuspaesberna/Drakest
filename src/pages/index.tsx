@@ -1,7 +1,6 @@
 import { FormEvent, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { FiHelpCircle } from 'react-icons/fi'
-import { useSession } from 'next-auth/client'
 import Head from 'next/head'
 
 import { Flex, Image, Stack, useToast} from '@chakra-ui/react'
@@ -9,23 +8,21 @@ import { Flex, Image, Stack, useToast} from '@chakra-ui/react'
 import Header from '../components/home/Header'
 import { Input } from '../components/geral/Form/Input'
 import { Form } from '../components/geral/Form'
-import { Aside } from '../components/home/Aside'
 import { api } from '../services/api'
+import { Loading } from '../components/geral/Loading'
+import { useLoding } from '../hooks/useLoding'
 
 export default function Home() {
   const toast = useToast()
   const router = useRouter()
+  const { isLoading } = useLoding()
 
-  const enterRoomFormRef = useRef<HTMLFormElement>(null)
   const enterRoomInputRef = useRef<HTMLInputElement>(null)
-  
-  const createRoomFormRef = useRef<HTMLFormElement>(null)
   const createRoomInputRef = useRef<HTMLInputElement>(null)
 
   const handleEnterRoom = async (event: FormEvent) => {
     event.preventDefault()
     const currentRoom = enterRoomInputRef.current.value
-
 
       if(currentRoom.split('').length === 6){
         try {
@@ -68,6 +65,10 @@ export default function Home() {
     router.push(`/room/${res.data.roomId}`)
   }
 
+  if(isLoading){    
+    return <Loading />;
+  }
+
   return (
     <>
       <Head>
@@ -101,7 +102,6 @@ export default function Home() {
               submitAction={handleCreateRoom}
               heading="Criar uma sala"
               submitButtonName="Criar"
-              ref={createRoomFormRef}
               icon={FiHelpCircle}
             >
               <Input
@@ -115,7 +115,6 @@ export default function Home() {
               submitAction={handleEnterRoom}
               heading="Entrar numa sala"
               submitButtonName="Buscar"
-              ref={enterRoomFormRef}
             >
               <Input
                 name="roomId"
