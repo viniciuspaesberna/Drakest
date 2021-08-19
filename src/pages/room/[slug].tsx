@@ -1,20 +1,20 @@
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/client";
 import Head from "next/head";
 
-import { Flex, useDisclosure } from "@chakra-ui/react";
+import { Flex, Text, useDisclosure } from "@chakra-ui/react";
 
 import { Characters } from "../../components/room/Characters";
 import { CharacterSheetModal } from "../../components/room/CharacterSheetModal";
 import { DicesSection } from "../../components/room/DicesSection";
-import { getSession } from "next-auth/client";
-import { GetServerSideProps } from "next";
 
-export default function Room(){
+export default function Room({user, roomId}){
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return(
     <>
       <Head>
-        {/* <title>{`Room-${roomId} | Drakest`}</title> */}
+        <title>Room-{roomId} | Drakest</title>
       </Head>
       
       <CharacterSheetModal
@@ -43,8 +43,9 @@ export default function Room(){
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({req}) => {
-  const session = await getSession({req}) 
+export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
+  const session = await getSession({req})   
+  const {slug} = params
 
   if(!session) {
     return {
@@ -59,7 +60,8 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
 
   return {
     props: {
-      user
+      user,
+      roomId: slug
     }
   }
 }

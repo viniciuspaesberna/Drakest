@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { getSession, useSession } from "next-auth/client";
-import { Flex } from "@chakra-ui/react";
+import { getSession } from "next-auth/client";
+import { Flex, Text } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
 import { AsideProfile } from "../components/profile/aside";
 
@@ -13,6 +13,10 @@ export default function Profile({user}){
 
       <Flex as="main">
         <AsideProfile />
+
+        <Text>
+          {user.name}
+        </Text>
       </Flex>
     </>
   )

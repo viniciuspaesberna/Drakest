@@ -46,7 +46,6 @@ function LoginSection() {
     </Flex>
   ) : (
     <Flex alignItems="center" >  
-      <Text mr="6">Login:</Text>
       <Button
         onClick={() => signIn('google')}
         p={0}
