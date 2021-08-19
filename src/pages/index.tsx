@@ -11,57 +11,83 @@ import { Form } from '../components/geral/Form'
 import { api } from '../services/api'
 import { Loading } from '../components/geral/Loading'
 import { useLoding } from '../hooks/useLoding'
+import { useSession } from 'next-auth/client'
 
 export default function Home() {
   const toast = useToast()
   const router = useRouter()
+  const [session] = useSession()
   const { isLoading } = useLoding()
 
-  const enterRoomInputRef = useRef<HTMLInputElement>(null)
+  const createRoomFormRef = useRef<HTMLFormElement>(null)
   const createRoomInputRef = useRef<HTMLInputElement>(null)
+
+  const enterRoomFormRef = useRef<HTMLFormElement>(null)
+  const enterRoomInputRef = useRef<HTMLInputElement>(null)
+
 
   const handleEnterRoom = async (event: FormEvent) => {
     event.preventDefault()
     const currentRoom = enterRoomInputRef.current.value
 
-      if(currentRoom.split('').length === 6){
-        try {
-          const res = await api.get('/room', {
-            params: {
-              roomId: currentRoom
-            }
-          })
+    if(!session){
+      toast({
+        duration: 3500,
+        title: 'Não logado',
+        status: 'warning',
+        description: 'Faça login com o google e tente novamente!',
+        isClosable: true
+      })
+      return
+    }
 
-          router.push(`/room/${res.data.roomId}`)
+    if(currentRoom.split('').length === 6){
+      try {
+        const res = await api.get('/room', {
+          params: {
+            roomId: currentRoom
+          }
+        })
 
-          return
-        } catch {
-          toast({
-            duration: 3500,
-            title: 'ID inválido',
-            status: 'warning',
-            description: 'Sala não encotrada, tente um ID existente!',
-            isClosable: true
-          })
-          return
-        }
-      } else {
+        router.push(`/room/${res.data.roomId}`)
+
+        return
+      } catch {
         toast({
           duration: 3500,
           title: 'ID inválido',
           status: 'warning',
-          description: 'Tente um ID de 6 digitos',
+          description: 'Sala não encotrada, tente um ID existente!',
           isClosable: true
         })
+        return
       }
-    return
+    } else {
+      toast({
+        duration: 3500,
+        title: 'ID inválido',
+        status: 'warning',
+        description: 'Tente um ID de 6 digitos',
+        isClosable: true
+      })
+    }
   }
 
   const handleCreateRoom = async (event: FormEvent) => {
     event.preventDefault()
 
-    const res = await api.post('/room')
+    if(!session){
+      toast({
+        duration: 3500,
+        title: 'Não logado',
+        status: 'warning',
+        description: 'Faça login com o google e tente novamente!',
+        isClosable: true
+      })
+      return
+    }
 
+    const res = await api.post('/room')
     router.push(`/room/${res.data.roomId}`)
   }
 
@@ -103,6 +129,7 @@ export default function Home() {
               heading="Criar uma sala"
               submitButtonName="Criar"
               icon={FiHelpCircle}
+              ref={createRoomFormRef}
             >
               <Input
                 name="roomPassword"
@@ -115,6 +142,7 @@ export default function Home() {
               submitAction={handleEnterRoom}
               heading="Entrar numa sala"
               submitButtonName="Buscar"
+              ref={enterRoomFormRef}
             >
               <Input
                 name="roomId"

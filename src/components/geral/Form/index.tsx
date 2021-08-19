@@ -19,16 +19,19 @@ const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> =
       <Heading fontSize="2xl" fontWeight="500" textAlign="center">
         {heading}
         {icon && <Icon 
-          onMouseEnter={() => toast({
-            status: "info",
-            title: "Criação de sala",
-            description: "Essa senha será utilizada para realizar ações como adiministrador da sala",
-            duration: 1000 * 60 //1 minute
-          })}
-          onMouseLeave={() => toast.closeAll()}
-          ml="2" 
-          color="blue.600" 
-          as={icon} />}
+            onMouseEnter={() => toast({
+              status: "info",
+              title: "Criação de sala",
+              description: "Essa senha será utilizada para realizar ações como adiministrador da sala",
+              duration: 1000 * 60 //1 minute
+            })}
+            onMouseLeave={() => toast.closeAll()}
+            ml="2" 
+            color="blue.600" 
+            as={icon}
+            _hover={{color: "blue.500"}}
+          />
+        }
       </Heading>
 
       <Divider my="6" borderColor="gray.600" />
