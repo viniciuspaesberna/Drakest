@@ -5,24 +5,19 @@ import Head from 'next/head'
 
 import { Flex, Image, Stack, useToast} from '@chakra-ui/react'
 
-import Header from '../components/home/Header'
-import { Input } from '../components/geral/Form/Input'
-import { Form } from '../components/geral/Form'
+import { Form, Input, Loading } from '../components/common'
+import { Header, Aside } from '../components/layout/home'
 import { api } from '../services/api'
-import { Loading } from '../components/geral/Loading'
 import { useLoding } from '../hooks/useLoding'
-import { useSession } from 'next-auth/client'
+import { parseCookies } from 'nookies'
+import { GetServerSideProps } from 'next'
 
-export default function Home() {
+export default function Home({session}) {
   const toast = useToast()
   const router = useRouter()
-  const [session] = useSession()
   const { isLoading } = useLoding()
 
-  const createRoomFormRef = useRef<HTMLFormElement>(null)
   const createRoomInputRef = useRef<HTMLInputElement>(null)
-
-  const enterRoomFormRef = useRef<HTMLFormElement>(null)
   const enterRoomInputRef = useRef<HTMLInputElement>(null)
 
 
@@ -31,14 +26,7 @@ export default function Home() {
     const currentRoom = enterRoomInputRef.current.value
 
     if(!session){
-      toast({
-        duration: 3500,
-        title: 'Não logado',
-        status: 'warning',
-        description: 'Faça login com o google e tente novamente!',
-        isClosable: true
-      })
-      return
+      return console.log('Nao logado')
     }
 
     if(currentRoom.split('').length === 6){
@@ -50,8 +38,6 @@ export default function Home() {
         })
 
         router.push(`/room/${res.data.roomId}`)
-
-        return
       } catch {
         toast({
           duration: 3500,
@@ -60,7 +46,6 @@ export default function Home() {
           description: 'Sala não encotrada, tente um ID existente!',
           isClosable: true
         })
-        return
       }
     } else {
       toast({
@@ -76,17 +61,16 @@ export default function Home() {
   const handleCreateRoom = async (event: FormEvent) => {
     event.preventDefault()
 
-    if(!session){
-      toast({
+    if(!session) {
+      return toast({
         duration: 3500,
         title: 'Não logado',
         status: 'warning',
         description: 'Faça login com o google e tente novamente!',
         isClosable: true
       })
-      return
     }
-
+  
     const res = await api.post('/room')
     router.push(`/room/${res.data.roomId}`)
   }
@@ -129,7 +113,6 @@ export default function Home() {
               heading="Criar uma sala"
               submitButtonName="Criar"
               icon={FiHelpCircle}
-              ref={createRoomFormRef}
             >
               <Input
                 name="roomPassword"
@@ -142,7 +125,6 @@ export default function Home() {
               submitAction={handleEnterRoom}
               heading="Entrar numa sala"
               submitButtonName="Buscar"
-              ref={enterRoomFormRef}
             >
               <Input
                 name="roomId"
@@ -156,4 +138,22 @@ export default function Home() {
       </Flex>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = parseCookies(ctx)
+
+  let session: boolean
+
+  if(cookies['next-auth.session-token']){
+    session = true
+  } else {
+    session = false 
+  }
+
+  return {
+    props: {
+      session
+    }
+  }
 }

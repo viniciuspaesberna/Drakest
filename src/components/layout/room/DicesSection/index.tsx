@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { useContext } from "react";
-import { DicesContext } from "../../../contexts/DicesContext";
-import { SectionHeading } from "../../geral/section/SectionHeading";
+import { DicesContext } from "../../../../contexts/DicesContext";
+import { SectionHeading } from "../../../common/Section/SectionHeading";
 import { CustomDices } from "./CustomDices";
 import { Dices } from "./Dices";
 

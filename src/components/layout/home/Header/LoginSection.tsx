@@ -38,7 +38,7 @@ function LoginSection() {
           color="gray.900"
         >
           <Flex align="center" p="2">
-            {session && <Text mx="2">{session.user.name}</Text>}
+            {session !== undefined && <Text mx="2">{session.user.name}</Text>}
             <CgClose size="20" />
           </Flex>
         </Button>

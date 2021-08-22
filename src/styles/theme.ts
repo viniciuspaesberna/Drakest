@@ -21,9 +21,6 @@ export const theme: ChakraTheme = extendTheme({
       body: 'Quicksand'
     },
     global: {
-      html: {
-        h: '100vh'
-      },
       body: {
         h: '100%',
         bg: 'gray.800',

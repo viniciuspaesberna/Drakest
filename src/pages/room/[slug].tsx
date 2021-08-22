@@ -4,17 +4,21 @@ import Head from "next/head";
 
 import { Flex, useDisclosure } from "@chakra-ui/react";
 
-import { Characters } from "../../components/room/Characters";
-import { CharacterSheetModal } from "../../components/room/CharacterSheetModal";
-import { DicesSection } from "../../components/room/DicesSection";
-import { Loading } from "../../components/geral/Loading";
+import { DicesSection, Characters, CharacterSheetModal, RoomHeader } from "../../components/layout/room";
+import { Loading } from "../../components/common/Loading";
 import { useLoding } from "../../hooks/useLoding";
+import { useRouter } from "next/router";
 
 export default function Room({user, roomId}){
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const {isLoading} = useLoding()
 
   if(isLoading){    
+    return <Loading />;
+  }
+
+  if(router.isFallback){    
     return <Loading />;
   }
 
@@ -29,21 +33,24 @@ export default function Room({user, roomId}){
         onRequestClose={onClose}
       />
 
-      <Flex w="100%" mx="auto">
-        <Flex flex="1">
+      <Flex w="100vw" h="100vh" flexDir="column">
+        <RoomHeader />
+
+        <Flex h="95vh">
           <Flex
-            width="30rem"
+            w="30rem"
+            h="100%"
             bg="gray.900"
-            rounded="3xl"
-            my="4"
+            rounded="3xl" 
             mx="6"
+            mb="4"
           >
             <DicesSection />
           </Flex>
 
-        </Flex>
-        <Flex align="center" w="100%" h="100vh" ml="auto" maxW="400px">
-          <Characters openCharacterSheet={onOpen} />
+          <Flex align="center" w="100%"  ml="auto" maxW="400px">
+            <Characters openCharacterSheet={onOpen} />
+          </Flex>
         </Flex>
       </Flex>
     </>

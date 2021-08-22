@@ -3,7 +3,7 @@ import React from 'react';
 import LoginSection from './LoginSection';
 import Logo from './Logo';
 
-const Header: React.FC = () => {
+export function Header() {
   return (
     <Flex
       w="100%"
@@ -21,5 +21,3 @@ const Header: React.FC = () => {
     </Flex>
   );
 }
-
-export default Header;

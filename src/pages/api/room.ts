@@ -36,6 +36,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await getSession({req})
     const roomId = generateRoomId()
 
+    if(!session){
+      return res.status(404).json({error: "user not found"})
+    }
+
     const user = await fauna.query<User>(
       q.Get(
         q.Match(

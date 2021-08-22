@@ -1,6 +1,6 @@
 import { Button, Flex } from "@chakra-ui/react";
 import { useContext } from "react";
-import { DicesContext } from "../../../contexts/DicesContext";
+import { DicesContext } from "../../../../contexts/DicesContext";
 
 export function Dices(){
   const { handleRollDices } = useContext(DicesContext)
