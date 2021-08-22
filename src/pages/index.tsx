@@ -68,7 +68,13 @@ export default function Home({session}) {
     event.preventDefault()
 
     if(!session) {
-      
+      return toast({
+        duration: 3500,
+        title: 'Não logado',
+        status: 'warning',
+        description: 'Faça login com o google e tente novamente!',
+        isClosable: true
+      })
     }
   
     const res = await api.post('/room')
