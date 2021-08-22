@@ -26,7 +26,13 @@ export default function Home({session}) {
     const currentRoom = enterRoomInputRef.current.value
 
     if(!session){
-      return console.log('Nao logado')
+      return toast({
+        duration: 3500,
+        title: 'Não logado',
+        status: 'warning',
+        description: 'Faça login com o google e tente novamente!',
+        isClosable: true
+      })
     }
 
     if(currentRoom.split('').length === 6){
@@ -62,13 +68,7 @@ export default function Home({session}) {
     event.preventDefault()
 
     if(!session) {
-      return toast({
-        duration: 3500,
-        title: 'Não logado',
-        status: 'warning',
-        description: 'Faça login com o google e tente novamente!',
-        isClosable: true
-      })
+      
     }
   
     const res = await api.post('/room')
