@@ -1,11 +1,19 @@
 import { BiArrowBack } from 'react-icons/bi' 
-
-import { Flex, Icon } from "@chakra-ui/react";
+import { FiCopy } from 'react-icons/fi';
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Link from 'next/link';
 
-export function RoomHeader(){
+import { Button, Flex, Icon, Text, useToast } from "@chakra-ui/react";
+
+interface RoomHeaderProps{
+  roomId: string
+}
+
+export function RoomHeader({roomId}: RoomHeaderProps){
+  const toast = useToast()
+
   return(
-    <Flex h="2rem" align="center" mx="6" >
+    <Flex h="2rem" align="center" justify="space-between" mx="6" >
       <Link href="/">
         <Icon
           as={BiArrowBack}

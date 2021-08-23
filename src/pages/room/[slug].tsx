@@ -34,7 +34,7 @@ export default function Room({user, roomId}){
       />
 
       <Flex w="100vw" h="100vh" flexDir="column">
-        <RoomHeader />
+        <RoomHeader roomId={roomId} />
 
         <Flex h="95vh">
           <Flex

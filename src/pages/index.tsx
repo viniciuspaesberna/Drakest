@@ -24,8 +24,10 @@ export default function Home({session}) {
   const handleEnterRoom = async (event: FormEvent) => {
     event.preventDefault()
     const currentRoom = enterRoomInputRef.current.value
+    const currentRoomLength = currentRoom.split('').length
 
     if(!session){
+      toast.closeAll()
       return toast({
         duration: 3500,
         title: 'Não logado',
@@ -35,7 +37,7 @@ export default function Home({session}) {
       })
     }
 
-    if(currentRoom.split('').length === 6){
+    if(currentRoomLength === 6){
       try {
         const res = await api.get('/room', {
           params: {
@@ -68,6 +70,7 @@ export default function Home({session}) {
     event.preventDefault()
 
     if(!session) {
+      toast.closeAll()
       return toast({
         duration: 3500,
         title: 'Não logado',
@@ -76,9 +79,20 @@ export default function Home({session}) {
         isClosable: true
       })
     }
-  
-    const res = await api.post('/room')
-    router.push(`/room/${res.data.roomId}`)
+    
+    try {
+      const res = await api.post('/room')
+
+      router.push(`/room/${res.data.roomId}`)
+    } catch {
+      return toast({
+        duration: 3500,
+        title: 'Erro',
+        status: 'error',
+        description: 'Algo deu errado tente novamente!',
+        isClosable: true
+      })
+    }
   }
 
   if(isLoading){    
