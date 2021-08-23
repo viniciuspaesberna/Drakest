@@ -23,7 +23,7 @@ export default function Profile({user}){
       <Flex as="main">
         <AsideProfile />
 
-        <Text>
+        <Text color="white">
           {user.name}
         </Text>
       </Flex>

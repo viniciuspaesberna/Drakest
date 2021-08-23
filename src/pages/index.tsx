@@ -165,7 +165,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   let session: boolean
 
-  if(cookies['next-auth.session-token']){
+  if(cookies['next-auth.session-token'] || cookies['__Secure-next-auth.session-token']){
     session = true
   } else {
     session = false 
