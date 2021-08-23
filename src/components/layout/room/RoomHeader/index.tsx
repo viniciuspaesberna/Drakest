@@ -17,6 +17,22 @@ export function RoomHeader(){
           }}
         />
       </Link>
+      <CopyToClipboard text={roomId}>
+        <Button
+          colorScheme="yellow"
+          onClick={() =>{
+            toast.closeAll()
+            toast({
+              status: "success",
+              title: "Copied!",
+              duration: 1500
+            })
+          }}
+        >
+          <FiCopy />
+          <Text ml="2">#{roomId}</Text>
+        </Button>
+      </CopyToClipboard>
     </Flex>
   )
 }
