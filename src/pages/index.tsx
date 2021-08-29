@@ -109,7 +109,7 @@ export default function Home({session}) {
       <Flex 
         as="main"
         display="flex"
-        flex="1"
+        h="85vh"
         justify="center"
       >
         {/* <Aside /> */}
@@ -119,13 +119,14 @@ export default function Home({session}) {
           flexDir="column"
           mb="4rem"
         >
-          <Flex maxW="600px" w="100%" flexShrink={0} mb="20" overflow="hidden">
+          <Flex maxW={["600px", "500px", "500px", "500px" ]} w="100%" flexShrink={0} mb="1rem" overflow="hidden">
             <Image src="/images/bg.png" h="100%" w="100%" />
           </Flex>
 
           <Stack 
             direction={['column', "row"]}
             spacing={['5rem', "15rem"]}
+            h="100%"
             display="flex"
             align="center"
             justify="center"
