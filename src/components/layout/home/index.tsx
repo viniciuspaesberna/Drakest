@@ -1,4 +1,4 @@
 import { Aside } from "./Aside";
-import { Header } from "./Header"
+import { HomeHeader } from "./HomeHeader"
 
-export { Header, Aside }
+export { HomeHeader, Aside }

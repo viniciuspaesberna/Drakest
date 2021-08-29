@@ -1,9 +1,8 @@
 import { BiArrowBack } from 'react-icons/bi' 
 import { FiCopy } from 'react-icons/fi';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import Link from 'next/link';
 
-import { Button, Flex, Icon, Text, useToast } from "@chakra-ui/react";
+import { Button, Flex, Icon, Text, Link, useToast } from "@chakra-ui/react";
 
 interface RoomHeaderProps{
   roomId: string

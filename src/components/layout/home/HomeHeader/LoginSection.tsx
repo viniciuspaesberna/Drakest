@@ -3,8 +3,9 @@ import { FcGoogle } from 'react-icons/fc'
 import { CgClose } from 'react-icons/cg';
 import { signIn, signOut, useSession } from 'next-auth/client'
 import Link from 'next/link'
+import { useEffect } from 'react';
 
-// import { Container } from './styles';
+// import { Container } from './styles';s
 
 function LoginSection() {
   const [session] = useSession()
@@ -13,6 +14,8 @@ function LoginSection() {
     base: false,
     lg: true
   })
+
+  useEffect(() => {}, [])
 
   return session ? (
     <Flex align="center">
@@ -38,7 +41,7 @@ function LoginSection() {
           color="gray.900"
         >
           <Flex align="center" p="2">
-            {session !== undefined && <Text mx="2">{session.user.name}</Text>}
+            {session && <Text mx="2">{session.user.name}</Text>}
             <CgClose size="20" />
           </Flex>
         </Button>

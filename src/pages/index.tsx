@@ -6,7 +6,7 @@ import Head from 'next/head'
 import { Flex, Image, Stack, useToast} from '@chakra-ui/react'
 
 import { Form, Input, Loading } from '../components/common'
-import { Header, Aside } from '../components/layout/home'
+import { HomeHeader, Aside } from '../components/layout/home'
 import { api } from '../services/api'
 import { useLoding } from '../hooks/useLoding'
 import { parseCookies } from 'nookies'
@@ -19,7 +19,6 @@ export default function Home({session}) {
 
   const createRoomInputRef = useRef<HTMLInputElement>(null)
   const enterRoomInputRef = useRef<HTMLInputElement>(null)
-
 
   const handleEnterRoom = async (event: FormEvent) => {
     event.preventDefault()
@@ -105,28 +104,30 @@ export default function Home({session}) {
         <title>Home | Drakest</title>
       </Head>
 
-      <Header />
+      <HomeHeader />
       
       <Flex 
         as="main"
         display="flex"
-        flex="1"
+        h="85vh"
+        justify="center"
       >
         {/* <Aside /> */}
 
         <Flex
           align="center"
-          justify="center"
           flexDir="column"
-          m="auto"
         >
-          <Image src="/bg.svg" scale="4" mt={["-8rem","-5rem"]}/>
+          <Flex maxW="600px" mb="20" overflow="hidden">
+            <Image src="/images/bg.png" h="100%" w="100%" />
+          </Flex>
 
           <Stack 
             direction={['column', "row"]}
             spacing={['5rem', "15rem"]}
-            mt={["-2rem", "-2rem", "2rem"]}
-            mb="4rem"
+            display="flex"
+            align="center"
+            justify="center"
           >
             <Form
               submitAction={handleCreateRoom}

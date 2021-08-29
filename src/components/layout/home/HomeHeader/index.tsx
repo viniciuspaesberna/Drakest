@@ -3,13 +3,13 @@ import React from 'react';
 import LoginSection from './LoginSection';
 import Logo from './Logo';
 
-export function Header() {
+export function HomeHeader() {
   return (
     <Flex
       w="100%"
       maxW="1120"
       mx="auto"
-      h="10rem"
+      h="15vh"
       align="center"
       p="6"
     >

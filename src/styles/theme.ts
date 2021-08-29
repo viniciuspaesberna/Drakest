@@ -25,7 +25,8 @@ export const theme: ChakraTheme = extendTheme({
         h: '100%',
         bg: 'gray.800',
         color: 'gray.50'
-      }
-    }
+      },
+    },
+
   }
 })
