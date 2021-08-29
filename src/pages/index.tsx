@@ -109,7 +109,7 @@ export default function Home({session}) {
       <Flex 
         as="main"
         display="flex"
-        h="85vh"
+        flex="1"
         justify="center"
       >
         {/* <Aside /> */}
@@ -117,8 +117,9 @@ export default function Home({session}) {
         <Flex
           align="center"
           flexDir="column"
+          mb="4rem"
         >
-          <Flex maxW="600px" mb="20" overflow="hidden">
+          <Flex maxW="600px" w="100%" flexShrink={0} mb="20" overflow="hidden">
             <Image src="/images/bg.png" h="100%" w="100%" />
           </Flex>
 
