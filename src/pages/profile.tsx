@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { getSession } from "next-auth/client";
-import { Flex, Text } from "@chakra-ui/react";
 import { GetServerSideProps } from "next";
+import { Flex, Text,Image } from "@chakra-ui/react";
 
-import { AsideProfile } from "../components/layout/profile/aside";
+import { ProfileHeader, ProfileAside } from "../components/layout/profile";
 import { Loading } from "../components/common/Loading";
 import { useLoding } from "../hooks/useLoding";
 
@@ -17,15 +17,55 @@ export default function Profile({user}){
   return (
     <>
       <Head>
-        <title>{user.name} profile | Drakest</title>
+        <title>{user.name} | Drakest</title>
       </Head>
 
-      <Flex as="main">
-        <AsideProfile />
+      <ProfileHeader />
 
-        <Text color="white">
+      <Flex 
+        as="main"
+        maxW="1120px"
+        h="80vh"
+        w="100%"
+        m="auto"
+        bg="gray.900"
+        flexDir="column"
+        rounded="md"
+        position="absolute"
+        top="20vh"
+        right="50vw"
+        transform=" translate(50%)"
+      >
+        <Image
+          src={user.image}
+          w="40"
+          position="relative"
+          top="-10%"
+          right="-50%"
+          transform=" translate(-50%)"
+          rounded="full"
+        />
+
+        <Text
+          mx="auto"
+          mt="-5rem"
+          mb=".2rem"
+          fontSize="4xl"
+        >
           {user.name}
         </Text>
+
+        <Flex
+          flex="1"
+        >
+          <ProfileAside />
+
+          <Flex
+            color="white"
+          >
+            
+          </Flex>
+        </Flex>
       </Flex>
     </>
   )
