@@ -7,11 +7,14 @@ interface FormProps {
   heading: string
   children?: ReactNode
   icon?: ElementType
+  iconTypeMessage?: "info" | "warning" | "success" | "error"
+  iconTitleMessage?: string
+  iconDescriptionMessage?: string
   submitAction: (e: FormEvent) => void
 }
 
 const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> = 
-({children, heading, submitButtonName, icon, submitAction}, ref) => {
+({children, heading, submitButtonName, icon, submitAction, iconTypeMessage, iconTitleMessage, iconDescriptionMessage}, ref) => {
   const toast = useToast()
 
   return (
@@ -20,9 +23,9 @@ const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> =
         {heading}
         {icon && <Icon 
             onMouseEnter={() => toast({
-              status: "info",
-              title: "Criação de sala",
-              description: "Essa senha será utilizada para realizar ações como adiministrador da sala",
+              status: iconTypeMessage,
+              title: iconTitleMessage,
+              description: iconDescriptionMessage,
               duration: 1000 * 60 //1 minute
             })}
             onMouseLeave={() => toast.closeAll()}

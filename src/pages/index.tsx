@@ -136,6 +136,9 @@ export default function Home({session}) {
               heading="Criar uma sala"
               submitButtonName="Criar"
               icon={FiHelpCircle}
+              iconTypeMessage="info"
+              iconTitleMessage="Criação de sala"
+              iconDescriptionMessage="Essa senha será utilizada para realizar ações como adiministrador da sala"
             >
               <Input
                 name="roomPassword"

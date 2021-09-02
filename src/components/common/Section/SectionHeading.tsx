@@ -8,7 +8,7 @@ interface SectionHeadingProps extends HeadingProps {
 export function SectionHeading({ name, nameColor, ...rest }: SectionHeadingProps){
   return (
     <Heading
-      color={nameColor || "yellow.500"}
+      color={nameColor ?? "yellow.500"}
       w="100%"
       my="2"
       textAlign="center"

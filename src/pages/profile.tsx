@@ -40,7 +40,7 @@ export default function Profile({user}){
           src={user.image}
           w="40"
           position="relative"
-          top="-10%"
+          top="-15%"
           right="-50%"
           transform=" translate(-50%)"
           rounded="full"
