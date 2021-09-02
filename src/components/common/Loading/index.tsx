@@ -29,7 +29,7 @@ export function Loading(){
       >
         <Text 
           fontFamily="aclonica" 
-          fontSize="9xl" 
+          fontSize={["7xl","9xl"]} 
           color="yellow.500"
         >
           Drakest
