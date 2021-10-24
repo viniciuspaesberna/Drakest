@@ -11,10 +11,10 @@ interface FormProps {
   iconTitleMessage?: string
   iconDescriptionMessage?: string
   submitAction: (e: FormEvent) => void
+  isLoading?: boolean
 }
 
-const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> = 
-({children, heading, submitButtonName, icon, submitAction, iconTypeMessage, iconTitleMessage, iconDescriptionMessage}, ref) => {
+const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> = ({children, heading, submitButtonName, icon, submitAction, iconTypeMessage, iconTitleMessage, iconDescriptionMessage, isLoading}, ref) => {
   const toast = useToast()
 
   return (
@@ -46,6 +46,7 @@ const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> =
         type="submit"
         mt="4"
         colorScheme="yellow"
+        isLoading={isLoading}
         color="gray.800"
       >
         {submitButtonName}

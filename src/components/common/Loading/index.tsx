@@ -7,12 +7,12 @@ const loaderVariants = {
     scale: [1, 1.1],
     transition: {
       opacity: {
-        yoyo: Infinity,
+        reverse: Infinity,
         duration: 1.5,
         ease: "easeInOut",
       },
       scale: {
-        yoyo: Infinity,
+        reverse: Infinity,
         duration: 1.5,
         ease: "easeInOut",
       }

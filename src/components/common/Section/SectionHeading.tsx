@@ -11,6 +11,7 @@ export function SectionHeading({ name, nameColor, ...rest }: SectionHeadingProps
       color={nameColor ?? "yellow.500"}
       w="100%"
       my="2"
+      h="fit-content"
       textAlign="center"
       {...rest}
     >

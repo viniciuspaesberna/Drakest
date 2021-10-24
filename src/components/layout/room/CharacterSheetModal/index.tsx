@@ -5,7 +5,7 @@ import Heading from './Heading';
 
 // import { Container } from './styles';
 
-interface ModalProps{
+interface CharacterSheetModalProps{
   isOpen: boolean
   onRequestClose: () => void
 }
@@ -13,7 +13,7 @@ interface ModalProps{
 export function CharacterSheetModal({
   isOpen,
   onRequestClose,
-}: ModalProps) {
+}: CharacterSheetModalProps) {
   return (
     <ReactModal
       ariaHideApp={false}

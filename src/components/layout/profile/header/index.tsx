@@ -1,13 +1,15 @@
-import { Button, Flex, Icon, Link } from "@chakra-ui/react";
+import { Button, Flex, Icon, Link, Image } from "@chakra-ui/react";
 import { signOut } from "next-auth/client";
 import { useRouter } from "next/router";
 import { BiArrowBack } from "react-icons/bi";
 
-export function ProfileHeader(){
+export function ProfileHeader({user}){
   const router = useRouter()
 
   return (
     <Flex 
+      as="header"
+      flexDir="column"
       maxW="1120px"
       h="20vh"
       m="auto"
@@ -47,6 +49,14 @@ export function ProfileHeader(){
           Deslogar
         </Button>
       </Flex>
+          
+      <Image
+          src={user.image}
+          w="40"
+          m="auto"
+          mb="-5%"
+          rounded="full"
+        />
     </Flex>
   )
 }

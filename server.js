@@ -5,6 +5,31 @@ module.exports = {
       creatorEmail: 'vini_berna2.0@hotmail.com',
       characterSheet: {
         name: 'Antohn Pyotr',
+        
+        characteristics: {
+          history: `Antohn Pyotr, veio de uma família que por muitas geração foram bardos, e como sempre teve uma ótima relação com eles, decidiu seguir a profissão. 
+          Sua familia sempre teve uma ótima reputação a não ser por uma prima que nasceu doente, por uma condição magica hereditaria que não se sabe como funciona.
+          Sua estadia na escola de bardos foi longa e bem proveitosa.`,
+
+          personality: {
+            personalityTraits: `naturalmente brincalhão, tem crises existenciais, gosta de jogos`,
+            ideals: `segue sua proprio ideia religiosa e fingi acreditar no que lhe falam, segue as ideias morais da família`,
+            bonds: `família, grupo de trabalho`,
+            flaws: `fraqueza emocional, crises de dores de cabeças intensas`,
+            featuresAndTraits: {
+              features: ``,
+              traits: ``
+            }
+          },
+
+          appearance: {
+            image: '',
+            age: 26,
+            height: 165,
+            weight: 65,
+            description: ``
+          },
+        },
 
         skillsSummary: {
           armorClass: 13,
@@ -24,17 +49,6 @@ module.exports = {
               currentPoints: 0,
               total: 3
             }
-          }
-        },
-
-        personality: {
-          personalityTraits: 'naturalmente brincalhão, tem crises existenciais, gosta de jogos',
-          ideals: 'segue sua proprio ideia religiosa e fingi acreditar no que lhe falam, segue as ideias morais da família',
-          bonds: 'família, grupo de trabalho',
-          flaws: 'fraqueza emocional, crises de dores de cabeças intensas',
-          featuresAndTraits: {
-            features: '',
-            traits: ''
           }
         },
 
@@ -64,7 +78,7 @@ module.exports = {
             amplifierPoint: 0
           },
 
-          inteligence: {
+          intelligence: {
             points: 12,
             amplifierPoint: 1
           },
@@ -103,7 +117,7 @@ module.exports = {
               points: 0
             },
 
-            inteligence: {
+            intelligence: {
               active: false,
               points: 1
             },
@@ -208,64 +222,64 @@ module.exports = {
           }
         },
         
-        equipment: {
-          weapons: [
-            {
-            name: 'rapieira', 
-
-            description: '',
-
-            atk: {
-                diceAmount: 1,
-                diceSize: 8,
-                amplifier: -1
-              },
-              atkBonus: {
-                dexterityAmplifier: 0,
-                strengthAmplifier: 0,
-              },
-            },
-            {
-              name: 'adaga',
-
+        inventory: {
+          money:{
+            pc: 0,
+            pp: 70,
+            pe: 0,
+            po: 48,
+            pl: 0,
+          },
+          
+          equipment: {
+            weapons: [
+              {
+              name: 'rapieira', 
+  
               description: '',
-
+  
               atk: {
-                diceAmount: 1,
-                diceSize: 5,
-                amplifier: 0
+                  diceAmount: 1,
+                  diceSize: 8,
+                  amplifier: -1
+                },
+                atkBonus: {
+                  dexterityAmplifier: 0,
+                  strengthAmplifier: 0,
+                },
               },
-              atkBonus: {
-                dexterityAmplifier: 2,
-                strengthAmplifier: -1,
+              {
+                name: 'adaga',
+  
+                description: '',
+  
+                atk: {
+                  diceAmount: 1,
+                  diceSize: 5,
+                  amplifier: 0
+                },
+                atkBonus: {
+                  dexterityAmplifier: 2,
+                  strengthAmplifier: -1,
+                },
               },
-            },
-            {
-              name: 'besta de mão',
-                
-              description: '',
-
-              atk: {
-                diceAmount: 1,
-                diceSize: 5,
-                amplifier: 0
-              },
-              atkBonus: {
-                dexterityAmplifier: 2,
-                strengthAmplifier: -1,
-              },
-            }, 
-          ],
-
-          inventory:{
-            money:{
-              pc: 0,
-              pp: 70,
-              pe: 0,
-              po: 48,
-              pl: 0,
-            },
-
+              {
+                name: 'besta de mão',
+                  
+                description: '',
+  
+                atk: {
+                  diceAmount: 1,
+                  diceSize: 5,
+                  amplifier: 0
+                },
+                atkBonus: {
+                  dexterityAmplifier: 2,
+                  strengthAmplifier: -1,
+                },
+              }, 
+            ],
+            
             tools: [
               {
                 name: 'viola de roda',
@@ -286,7 +300,6 @@ module.exports = {
             ],
           }
         },
-        
       }
     }
   ]

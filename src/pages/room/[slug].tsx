@@ -1,29 +1,47 @@
+import { useEffect } from 'react'
 import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/client";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { getSession } from "next-auth/client";
 
 import { Flex, useDisclosure } from "@chakra-ui/react";
 
 import { DicesSection, Characters, CharacterSheetModal, RoomHeader } from "../../components/layout/room";
 import { Loading } from "../../components/common/Loading";
 import { useLoding } from "../../hooks/useLoding";
-import { useRouter } from "next/router";
+import socketService from '../../services/socketService';
+import roomService from '../../services/roomService';
+import { DicesProvider } from '../../contexts/DicesContext';
 
-export default function Room({user, roomId}){
+export default function Room({ roomId }){
   const router = useRouter()
+  const { isLoading } = useLoding()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const {isLoading} = useLoding()
 
-  if(isLoading){    
-    return <Loading />;
+  useEffect(() => {
+    onRefreshRoom()
+  }, [])  
+  
+  async function onRefreshRoom(){
+    if(!socketService.socket){
+      await socketService.connect(process.env.SOCKETIO_URL)
+      
+      const isAbleToJoinRoom = roomService.joinGameRoomRequest(socketService.socket, roomId)
+
+      if(isAbleToJoinRoom) {
+        router.push(`/room/${roomId}`)
+      } else {
+        router.push('/')
+      }
+    }
   }
-
-  if(router.isFallback){    
+  
+  if(router.isFallback || isLoading){    
     return <Loading />;
   }
 
   return(
-    <>
+    <DicesProvider roomId={roomId}>
       <Head>
         <title>Room-{roomId} | Drakest</title>
       </Head>
@@ -53,7 +71,7 @@ export default function Room({user, roomId}){
           </Flex>
         </Flex>
       </Flex>
-    </>
+    </DicesProvider>
   )
 }
 
@@ -70,11 +88,8 @@ export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
     }
   }
 
-  const user = session.user
-
   return {
     props: {
-      user,
       roomId: slug
     }
   }

@@ -45,5 +45,13 @@ export default NextAuth({
         return false
       }
     },
+
+    async jwt(token, user, account, profile, isNewUser) {
+      if (account?.accessToken) {
+        token.accessToken = account.accessToken;
+      }
+      
+      return token;
+    },
   }
 })

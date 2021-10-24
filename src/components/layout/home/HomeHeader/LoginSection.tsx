@@ -1,23 +1,30 @@
-import { Avatar, Box, Button, Flex, Text, useBreakpointValue } from '@chakra-ui/react';
+import { useContext, useEffect } from 'react';
 import { FcGoogle } from 'react-icons/fc'
 import { CgClose } from 'react-icons/cg';
-import { signIn, signOut, useSession } from 'next-auth/client'
 import Link from 'next/link'
-import { useEffect } from 'react';
+import { signIn, signOut } from 'next-auth/client';
 
-// import { Container } from './styles';s
+import { Avatar, Button, Flex, Text, useBreakpointValue } from '@chakra-ui/react';
+
+import { AuthContext } from '../../../../contexts/auth';
+import SocketService from '../../../../services/socketService';
+
 
 function LoginSection() {
-  const [session] = useSession()
+  const { user } = useContext(AuthContext)
+
+  useEffect(() => {
+    if(user){
+      SocketService.connect(process.env.SOCKETIO_URL).catch((err) => { error: err })
+    }
+  }, [user])
 
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true
   })
 
-  useEffect(() => {}, [])
-
-  return session ? (
+  return user ? (
     <Flex align="center">
       <Link href="/profile">
         <Avatar
@@ -26,8 +33,8 @@ function LoginSection() {
           _hover={{
             cursor: 'pointer'
           }}
-          src={session.user.image}
-          name={session.user.name}
+          src={user.image}
+          name={user.name}
         />
       </Link>
       { isWideVersion && (
@@ -41,7 +48,7 @@ function LoginSection() {
           color="gray.900"
         >
           <Flex align="center" p="2">
-            {session && <Text mx="2">{session.user.name}</Text>}
+            <Text mx="2">{user.name}</Text>
             <CgClose size="20" />
           </Flex>
         </Button>
@@ -50,7 +57,7 @@ function LoginSection() {
   ) : (
     <Flex alignItems="center" >  
       <Button
-        onClick={() => signIn('google')}
+        onClick={() => signIn("google")}
         p={0}
         bg="whiteAlpha.900"
         _hover={{

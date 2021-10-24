@@ -1,12 +1,28 @@
+import { useContext, useEffect } from "react";
+
 import { Flex, Text } from "@chakra-ui/react";
-import { useContext } from "react";
+
+import socketService from "../../../../services/socketService";
+import roomService from "../../../../services/roomService";
 import { DicesContext } from "../../../../contexts/DicesContext";
 import { SectionHeading } from "../../../common/Section/SectionHeading";
 import { CustomDices } from "./CustomDices";
 import { Dices } from "./Dices";
 
 export function DicesSection(){
-  const { dicesValues } = useContext(DicesContext)
+  const { dicesValues, setDicesValues, play } = useContext(DicesContext)
+
+  useEffect(() => {
+    if(socketService.socket){
+      let dices = []
+      roomService.dicesRolled(socketService.socket, (rollInfos: any) => {
+        play()
+        setDicesValues(rollInfos.dicesValues)
+        dices = rollInfos.dicesValues
+      })
+      setDicesValues(dices)
+    }
+  }, [])
 
   return (
     <Flex 
@@ -30,20 +46,22 @@ export function DicesSection(){
           overflowY="auto"
           boxShadow="inset -2px -2px 10px #181b23"
         >
-          {dicesValues?.map((number, index) => (  
-            <Text
-              key={index}
-              px="2"
-              mx="1"
-              fontWeight="500"
-              fontSize="2xl"
-              border="2px solid"
-              borderRadius="lg"
-              borderColor="gray.900"
-            >
-              {number}
-            </Text> 
-          ))}
+          {dicesValues?.map((number, index) => {
+            return (  
+              <Text
+                key={index}
+                px="2"
+                mx="1"
+                fontWeight="500"
+                fontSize="2xl"
+                border="2px solid"
+                borderRadius="lg"
+                borderColor="gray.900"
+              >
+                {number}
+              </Text> 
+            )
+          })}
         </Flex>
 
         <Flex flexDir="column" maxW="50%">

@@ -1,14 +1,16 @@
 import Head from "next/head";
 import { getSession } from "next-auth/client";
 import { GetServerSideProps } from "next";
-import { Flex, Text,Image } from "@chakra-ui/react";
+import { Flex, Text, Divider } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 
-import { ProfileHeader, ProfileAside } from "../components/layout/profile";
-import { Loading } from "../components/common/Loading";
+import { ProfileHeader, ProfileAside, CharacterSection } from "../components/layout/profile";
+import { CreateCharacterModal, Loading } from "../components/common";
 import { useLoding } from "../hooks/useLoding";
 
 export default function Profile({user}){
   const { isLoading } = useLoding()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   if(isLoading){    
     return <Loading />;
@@ -20,50 +22,48 @@ export default function Profile({user}){
         <title>{user.name} | Drakest</title>
       </Head>
 
-      <ProfileHeader />
+      <CreateCharacterModal 
+        isOpen={isOpen}
+        onClose={onClose}
+      />
+
+      <ProfileHeader user={user} />
 
       <Flex 
         as="main"
         maxW="1120px"
-        h="80vh"
+        h="100%"
         w="100%"
         m="auto"
-        bg="gray.900"
+        mb="8"
+        bg="gray.700"
         flexDir="column"
         rounded="md"
-        position="absolute"
-        top="20vh"
-        right="50vw"
-        transform=" translate(50%)"
       >
-        <Image
-          src={user.image}
-          w="40"
-          position="relative"
-          top="-15%"
-          right="-50%"
-          transform=" translate(-50%)"
-          rounded="full"
-        />
-
         <Text
           mx="auto"
-          mt="-5rem"
+          mt="5rem"
           mb=".2rem"
           fontSize="4xl"
+          fontWeight="extrabold"
         >
           {user.name}
         </Text>
 
+        <Divider borderColor="gray.500" boxShadow="1px 1px 2px #d1d2dc"/>
+
         <Flex
           flex="1"
+          mt="1rem"
+          mx="6"
         >
           <ProfileAside />
 
           <Flex
+            w="100%"
             color="white"
           >
-            
+            <CharacterSection onOpen={onOpen} />
           </Flex>
         </Flex>
       </Flex>

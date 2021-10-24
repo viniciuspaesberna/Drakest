@@ -3,6 +3,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/client";
 
 import { fauna } from "../../services/fauna"
+import gameService from "../../services/roomService";
+import socketService from "../../services/socketService";
 import { generateRoomId } from "../../utils/generateRandomRoomId";
 
 type User = {
@@ -12,8 +14,9 @@ type User = {
 }
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const socket = socketService.socket
+
   if (req.method === 'GET'){
-    
     const { roomId } = req.query
 
     const currentRoomIdExists = await fauna.query(
@@ -32,11 +35,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(404).json({error: "Room id not found"})
   }
 
+
   if (req.method === 'POST'){
     const session = await getSession({req})
-    
-    const roomId = generateRoomId()
 
+    const roomId = generateRoomId()
+    
     if(!session){
       return res.status(404).json({error: "user not found"})
     }
@@ -72,6 +76,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         )
       )
     )
+
+    // const roomId = gameService.createRoom(socket, session.user.email)
 
     return res.status(202).json({roomId})
   }
