@@ -15,7 +15,7 @@ export function DiceInput({ name }: DiceInputProps){
             name={`${name}DiceAmount`}
             textAlign="center"
             bgColor="gray.700"
-            />
+          />
           
           <Text fontSize="3xl" color="" fontWeight="500">D</Text>
           

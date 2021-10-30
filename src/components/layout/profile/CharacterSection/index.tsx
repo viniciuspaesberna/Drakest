@@ -29,13 +29,13 @@ export function CharacterSection({
         px="4"
         rounded="md"
       >
+        <AddCharacterButton onOpen={onOpen} />
         <CharacterListItem image="https://github.com/HaloSara121.png" name="HaloSara" />
         <CharacterListItem image="https://github.com/HaloSara121.png" name="HaloSara" />
         <CharacterListItem image="https://github.com/HaloSara121.png" name="HaloSara" />
         <CharacterListItem image="https://github.com/HaloSara121.png" name="HaloSara" />
         <CharacterListItem image="https://github.com/HaloSara121.png" name="HaloSara" />  
         <CharacterListItem image="https://github.com/HaloSara121.png" name="HaloSara" />    
-        <AddCharacterButton onOpen={onOpen} />
       </SimpleGrid>
     </Section>
   )

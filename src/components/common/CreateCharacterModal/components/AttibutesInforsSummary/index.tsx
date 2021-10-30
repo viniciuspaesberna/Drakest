@@ -33,7 +33,8 @@ export function AttributesInfosSummary(){
             w="47%"
             flexDir="column"
             bg="gray.800"
-            rounded="md"
+            roundedTopLeft="md"
+            roundedBottomLeft="md"
             _hover={{
               bg: "gray.900"
             }}
@@ -62,10 +63,12 @@ export function AttributesInfosSummary(){
             bg="gray.800"
             w="100%"
             h="32"
-            rounded="md"
-            ml="4"
+            // rounded="md"
+            // ml="4"
             p="2"
             align="center"
+            roundedTopRight="md"
+            roundedBottomRight="md"
           > 
             <Flex
               flexDir="column"
@@ -82,7 +85,6 @@ export function AttributesInfosSummary(){
                 w="100%"
                 height="100%"
                 name="totalHp"
-                rounded="md"
                 bgColor="transparent"
                 border="none"
                 textAlign="center"
@@ -94,6 +96,7 @@ export function AttributesInfosSummary(){
               flexDir="column"
               w="50%"
               ml="2"
+              rounded="md"
             >
               <Text
                 textAlign="center"

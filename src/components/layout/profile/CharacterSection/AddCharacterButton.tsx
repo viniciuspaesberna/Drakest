@@ -11,7 +11,7 @@ export function AddCharacterButton({
   return(
     <IconButton
       aria-label="adicionar personagem"
-      h="180px"
+      h="100%"
       display="flex"
       align="center"
       justify="center"

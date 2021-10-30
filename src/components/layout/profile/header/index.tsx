@@ -2,6 +2,7 @@ import { Button, Flex, Icon, Link, Image } from "@chakra-ui/react";
 import { signOut } from "next-auth/client";
 import { useRouter } from "next/router";
 import { BiArrowBack } from "react-icons/bi";
+import { VscSignOut } from "react-icons/vsc";
 
 export function ProfileHeader({user}){
   const router = useRouter()
@@ -46,7 +47,10 @@ export function ProfileHeader({user}){
             router.push('/')
           }}
         >
-          Deslogar
+          <VscSignOut size="24" />
+          <Flex ml="2">
+            Deslogar
+          </Flex>
         </Button>
       </Flex>
           
