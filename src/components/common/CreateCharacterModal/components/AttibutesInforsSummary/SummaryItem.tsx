@@ -19,7 +19,10 @@ export function SummaryItem({
       align="center"
       bgColor="gray.800"
       rounded="md"
-      w="100%"
+      _hover={{
+        bgColor:'gray.900'
+      }}
+      transition="background-color .4s"
     >
       <Text
         textAlign="center"
@@ -30,11 +33,13 @@ export function SummaryItem({
         type="number"
         name={inputName} 
         flex="1"
+        w="60%"
         bgColor="none"
+        border="none"
         _hover={{}}
         textAlign="center"
         p="2"
-        fontSize="3xl"
+        fontSize="5xl"
       />
     </Flex>
   )

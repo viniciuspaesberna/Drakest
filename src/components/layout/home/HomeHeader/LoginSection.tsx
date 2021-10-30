@@ -15,7 +15,7 @@ function LoginSection() {
 
   useEffect(() => {
     if(user){
-      SocketService.connect(process.env.SOCKETIO_URL).catch((err) => { error: err })
+      SocketService.connect("https://drakest-back-end.herokuapp.com/").catch((err) => { error: err })
     }
   }, [user])
 

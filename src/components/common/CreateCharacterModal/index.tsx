@@ -168,7 +168,7 @@ export function CreateCharacterModal({
             </Flex>
 
             <Flex
-              maxW="35rem"
+              maxW="32rem"
             >
               <Scope path="attributesSummary">
                 <AttributesInfosSummary />
