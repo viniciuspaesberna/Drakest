@@ -13,6 +13,7 @@ import { calculateAmplifiers } from "../../../utils/calculateAmplifier";
 import { SavingThrowsList } from "./components/SavingThrowsList";
 import { SkillsList } from "./components/SkillsList";
 import { AttributesInfosSummary } from "./components/AttibutesInforsSummary";
+import { Inventory } from "./components/Inventory";
 
 interface CreateCharacterModalProps{
   isOpen: boolean
@@ -126,7 +127,7 @@ export function CreateCharacterModal({
       content: {
         maxWidth: "1420px",
         width: "100%",
-        margin: '0 auto',
+        margin: '0 auto 0 auto',
         border: 0,
         borderRadius: "8px",
         backgroundColor: '#353646',
@@ -136,12 +137,12 @@ export function CreateCharacterModal({
       },
     }}
     >
-      <Heading onRequestClose={onClose} />
-
       <Form
         ref={formRef}
         onSubmit={handleSubmit}
-        >
+      >
+        <Heading onRequestClose={onClose} />
+
         <Flex 
           display="flex"
           flexDir="column"
@@ -169,14 +170,18 @@ export function CreateCharacterModal({
 
             <Flex
               maxW="32rem"
+              flexDir="column"
             >
               <Scope path="attributesSummary">
                 <AttributesInfosSummary />
               </Scope>
+              <Scope path="inventory">
+                <Inventory />
+              </Scope>
             </Flex>
           </Flex>
         </Flex>
-        <Button type="submit">submit</Button>
+        {/* <Button type="submit">submit</Button> */}
       </Form>
     </ReactModal>
   )

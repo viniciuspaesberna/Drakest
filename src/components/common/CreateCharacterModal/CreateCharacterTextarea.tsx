@@ -1,17 +1,25 @@
-import { Input, InputProps } from "@chakra-ui/react";
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useField } from "@unform/core";
 
+import { Textarea, TextareaProps } from "@chakra-ui/react";
 
-export function CreateCharacterModalInput({ name, ...rest}: InputProps){
-  const InputRef = useRef<HTMLInputElement>(null)
+interface CreateCharacterTextareaProps extends TextareaProps {
+  name: string
+}
+
+export function CreateCharacterTextarea({
+  name,
+  ...rest
+}: CreateCharacterTextareaProps){
+
+  const TextareaRef = useRef<HTMLTextAreaElement>(null)
 
   const {fieldName, defaultValue, registerField } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: InputRef,
+      ref: TextareaRef,
       getValue: ref => {
         return ref.current.value
       },
@@ -25,22 +33,17 @@ export function CreateCharacterModalInput({ name, ...rest}: InputProps){
   }, [fieldName, registerField])
 
   return (
-    <Input
+    <Textarea 
       defaultValue={defaultValue}
-      ref={InputRef}
-      transition="background-color .4s"
-      variant="unstyled"
-      p="2"
-      border="1px solid #181b23cc"
-      borderRadius="4"
-      autoComplete="off"
-      fontSize="2xl"
-      bgColor='gray.800'
+      name={name}
+      ref={TextareaRef}
+      resize="none"
+      border="none"
+      bg="gray.800"
+      fontSize="xl"
+      lineHeight="6"
       _hover={{
-        bgColor:'gray.900'
-      }}
-      _placeholder={{
-        color: 'gray.400'
+        bg: "gray.900"
       }}
       _focus={{
         outline: "none",

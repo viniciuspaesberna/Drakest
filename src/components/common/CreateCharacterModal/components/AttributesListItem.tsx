@@ -72,6 +72,9 @@ export function AttributesListItem({
           bgColor="none"
           border="none"
           _hover={{}}
+          _focus={{
+            outline: "none"
+          }}
         />
       </Flex>
     </ListItem>

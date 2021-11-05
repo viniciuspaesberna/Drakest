@@ -19,6 +19,7 @@ function Heading({onRequestClose}: HeadingProps){
     >
       <Flex align="center" justify="space-between" w="100px">
         <IconButton
+          type="submit"
           colorScheme="yellow"
           _focus={{
             outline: "none"

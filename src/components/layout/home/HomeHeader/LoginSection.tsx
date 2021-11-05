@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { FcGoogle } from 'react-icons/fc'
 import { CgClose } from 'react-icons/cg';
 import Link from 'next/link'
-import { signIn, signOut } from 'next-auth/client';
+import { signIn } from 'next-auth/client';
 
 import { Avatar, Button, Flex, Text, useBreakpointValue } from '@chakra-ui/react';
 
@@ -11,11 +11,12 @@ import SocketService from '../../../../services/socketService';
 
 
 function LoginSection() {
-  const { user } = useContext(AuthContext)
+  const { user, custonSignOut } = useContext(AuthContext)
 
   useEffect(() => {
     if(user){
-      SocketService.connect("https://drakest-back-end.herokuapp.com/").catch((err) => { error: err })
+      // SocketService.connect("https://drakest-back-end.herokuapp.com/").catch((err) => { error: err })
+      SocketService.connect("http://localhost:8080").catch((err) => { error: err })
     }
   }, [user])
 
@@ -39,7 +40,7 @@ function LoginSection() {
       </Link>
       { isWideVersion && (
         <Button
-          onClick={() => signOut()}
+          onClick={() => custonSignOut()}
           p={0}
           bg="whiteAlpha.900"
           _hover={{

@@ -20,8 +20,8 @@ export function JoinRoomForm(){
   const handleEnterRoom = async (event: FormEvent) => {
     event.preventDefault()
     const socket = socketService.socket
-    const currentRoom = enterRoomInputRef.current.value
-    const currentRoomLength = currentRoom.split('').length
+    const roomId = enterRoomInputRef.current.value
+    const roomIdlength = roomId.split('').length
 
     if(!user){
       toast.closeAll()
@@ -34,21 +34,36 @@ export function JoinRoomForm(){
       })
     }
 
-    if(currentRoomLength === 6){
+    if(roomIdlength === 6){
       try {
         setIsloading(true)
-        const isAbleToJoinRoom = await RoomService.joinGameRoomRequest(socket, currentRoom)
+        const isAbleToJoinRoom = await RoomService.joinGameRoomRequest(socket, roomId)
+
+        setInterval(() => {
+          if (!isAbleToJoinRoom) {
+            setIsloading(false)
+  
+            toast({
+              duration: 3500,
+              title: 'Erro',
+              status: 'error',
+              description: "Tempo excedido!",
+              isClosable: true
+            })
+          }
+        }, 2000)
 
         if (isAbleToJoinRoom){
           setIsloading(false)
           const res = await api.get('/room', {
             params: {
-              roomId: currentRoom
+              roomId
             }
           })
         
           router.push(`/room/${res.data.roomId}`)
         } else {
+          setIsloading(false)
           toast({
             duration: 3500,
             title: 'Sala Cheia!',
@@ -56,7 +71,6 @@ export function JoinRoomForm(){
             description: 'Sala Cheia, Crie uma sala para jogar!',
             isClosable: true
           })
-          setIsloading(false)
         }
       } catch {
         toast({

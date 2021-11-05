@@ -46,12 +46,12 @@ export default NextAuth({
       }
     },
 
-    async jwt(token, user, account, profile, isNewUser) {
-      if (account?.accessToken) {
-        token.accessToken = account.accessToken;
-      }
+    // async jwt(token, user, account, profile, isNewUser) {
+    //   if (account?.accessToken) {
+    //     token.accessToken = account.accessToken;
+    //   }
       
-      return token;
-    },
+    //   return token;
+    // },
   }
 })
