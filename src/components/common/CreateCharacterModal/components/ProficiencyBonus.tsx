@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 
-import { CreateCharacterModalInput } from "../CreateCharacterModalInput";
+import { CreateCharacterModalInput } from "../CreateCharacterInput";
 
 interface ProficiencyBonusProps{
   setAttributeAmplifier: (name: string, skillName: string) => void
@@ -27,6 +27,7 @@ export function ProficiencyBonus({setAttributeAmplifier}: ProficiencyBonusProps)
         bgColor="gray.100"
         color="gray.900"
         _hover={{}}
+        _focus={{}}
         rounded="full"
         textAlign="center"
         fontWeight="bold"

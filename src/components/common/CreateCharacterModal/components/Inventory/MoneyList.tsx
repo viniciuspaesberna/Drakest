@@ -1,5 +1,5 @@
 import { Stack } from "@chakra-ui/react";
-import { CreateCharacterModalInput } from "../../CreateCharacterModalInput";
+import { CreateCharacterModalInput } from "../../CreateCharacterInput";
 
 export function MoneyList(){
   return (

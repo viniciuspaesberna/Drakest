@@ -19,7 +19,7 @@ export function SkillsList({ setAttributeAmplifier }: SkillsListProps){
         fontSize="lg"
         fontWeight="semibold"
       >
-        Pericias
+        Perícias
       </Text>
       <Scope path="skills">
         <SkillListItem

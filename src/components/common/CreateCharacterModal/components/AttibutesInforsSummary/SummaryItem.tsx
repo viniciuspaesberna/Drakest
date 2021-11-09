@@ -1,6 +1,6 @@
 import { Flex, Text } from '@chakra-ui/react'
 
-import { CreateCharacterModalInput } from '../../CreateCharacterModalInput'
+import { CreateCharacterModalInput } from '../../CreateCharacterInput'
 
 
 interface SummaryItemProps{
@@ -26,6 +26,9 @@ export function SummaryItem({
     >
       <Text
         textAlign="center"
+        color="gray.400"
+        fontWeight="bold"
+        fontSize="md"
       >
         {name}
       </Text>

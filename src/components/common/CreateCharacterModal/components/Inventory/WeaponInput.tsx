@@ -1,7 +1,7 @@
 import { Stack } from "@chakra-ui/react";
 import { Scope } from "@unform/core";
 
-import { CreateCharacterModalInput } from "../../CreateCharacterModalInput";
+import { CreateCharacterModalInput } from "../../CreateCharacterInput";
 
 interface WeaponInputProps {
   name: string

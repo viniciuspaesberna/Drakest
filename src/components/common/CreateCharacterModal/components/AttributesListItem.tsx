@@ -1,6 +1,6 @@
 import { Flex, Text, ListItem, InputProps } from "@chakra-ui/react";
 
-import { CreateCharacterModalInput } from "../CreateCharacterModalInput";
+import { CreateCharacterModalInput } from "../CreateCharacterInput";
 
 interface AttributesListItemProps extends InputProps{
   inputName: string
@@ -29,8 +29,8 @@ export function AttributesListItem({
     >
       <Text
         fontSize="lg"
-        fontWeight="medium"
         textAlign="center"
+        fontWeight="bold"
       >
         {attributeName}
       </Text>
@@ -44,6 +44,9 @@ export function AttributesListItem({
         rounded="lg"
         border="0"
         _hover={{}}
+        _focus={{
+          outline: "none"
+        }}
         onChange={() => {
           setAttributeAmplifier(inputName, 'all')
         }}

@@ -12,7 +12,6 @@ export function AttributesList({setAttributeAmplifier}: AttributesListProps){
     <List
       spacing="8"
       w="10%"
-      mr="4"
     >
       <Scope path="attributes">
         <AttributesListItem

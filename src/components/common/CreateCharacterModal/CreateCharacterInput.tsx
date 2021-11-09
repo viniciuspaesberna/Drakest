@@ -3,7 +3,11 @@ import { useRef, useEffect } from "react";
 import { useField } from "@unform/core";
 
 
-export function CreateCharacterModalInput({ name, ...rest}: InputProps){
+export function CreateCharacterModalInput({ 
+  name,
+  placeholder,
+  ...rest
+}: InputProps){
   const InputRef = useRef<HTMLInputElement>(null)
 
   const {fieldName, defaultValue, registerField } = useField(name);
@@ -31,7 +35,7 @@ export function CreateCharacterModalInput({ name, ...rest}: InputProps){
       transition="background-color .4s"
       variant="unstyled"
       p="2"
-      border="1px solid #181b23cc"
+      // border="1px solid #181b23cc"
       borderRadius="4"
       autoComplete="off"
       fontSize="2xl"
@@ -46,6 +50,8 @@ export function CreateCharacterModalInput({ name, ...rest}: InputProps){
         outline: "none",
         bg: "gray.900"
       }}
+      title={placeholder}
+      placeholder={placeholder}
       {...rest}
     />
   )

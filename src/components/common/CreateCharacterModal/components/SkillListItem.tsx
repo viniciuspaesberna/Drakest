@@ -1,6 +1,6 @@
 import { ListItem, Text, Flex } from "@chakra-ui/react";
-import { CreateCharacterModalInput } from '../CreateCharacterModalInput';
-import { CreateCharacterModalCheckBox } from '../CreateCharacterModalCheckBox';
+import { CreateCharacterModalInput } from '../CreateCharacterInput';
+import { CreateCharacterModalCheckBox } from '../CreateCharacterCheckBox';
 
 interface SkillListItemProps{
   name: string
@@ -49,6 +49,8 @@ export function SkillListItem({
 
       <Text
         textAlign="right"
+        color="gray.400"
+        fontWeight="semibold"
       >
         {label}
       </Text>

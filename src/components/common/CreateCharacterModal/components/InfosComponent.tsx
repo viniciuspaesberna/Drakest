@@ -3,7 +3,7 @@ import { Scope } from "@unform/core";
 
 import { Flex, SimpleGrid } from "@chakra-ui/react";
 
-import { CreateCharacterModalInput } from "../CreateCharacterModalInput";
+import { CreateCharacterModalInput } from "../CreateCharacterInput";
 import { CurrentCharacterSheetContext } from "../../../../contexts/CurrentCharacterSheetContext";
 
 export function InfosComponent(){
@@ -27,8 +27,7 @@ export function InfosComponent(){
           templateColumns="1fr 1fr 1fr"
           spacing="4"
           w="100%"
-          my="auto"
-          >
+        >
           <CreateCharacterModalInput name="class" placeholder="Classe" />
           <CreateCharacterModalInput name="background" placeholder="Antecedentes" />
           <CreateCharacterModalInput name="playerName" placeholder="Nome do Jogador" />

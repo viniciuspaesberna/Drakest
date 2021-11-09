@@ -3,7 +3,7 @@ import React, { useRef, useCallback } from "react";
 import { Scope } from "@unform/core";
 import { Form } from "@unform/web";
 
-import { Flex, Button } from "@chakra-ui/react";
+import { Flex, Stack } from "@chakra-ui/react";
 
 import Heading from "./components/Heading";
 import { AttributesList } from "./components/AttributesList";
@@ -14,6 +14,12 @@ import { SavingThrowsList } from "./components/SavingThrowsList";
 import { SkillsList } from "./components/SkillsList";
 import { AttributesInfosSummary } from "./components/AttibutesInforsSummary";
 import { Inventory } from "./components/Inventory";
+import { PersonalitySection } from "./components/PersonalitySection";
+import { CreateCharacterTextarea } from "./CreateCharacterTextarea";
+import { AppearenceGrid } from "./components/AppearenceGrid";
+import { CharacterHistory } from "./components/CharacterHistory";
+import { Triumph } from "./components/Triumph";
+import { SpellsSection } from "./components/SpellsSection";
 
 interface CreateCharacterModalProps{
   isOpen: boolean
@@ -120,22 +126,22 @@ export function CreateCharacterModal({
 
   return (
     <ReactModal
-    isOpen={isOpen}
-    onRequestClose={onClose}
-    ariaHideApp={false}
-    style={{
-      content: {
-        maxWidth: "1420px",
-        width: "100%",
-        margin: '0 auto 0 auto',
-        border: 0,
-        borderRadius: "8px",
-        backgroundColor: '#353646',
-      },
-      overlay: {
-        backgroundColor: "rgba(0, 0, 0, 0.6)"
-      },
-    }}
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      ariaHideApp={false}
+      style={{
+        content: {
+          maxWidth: "1420px",
+          width: "100%",
+          margin: '0 auto 0 auto',
+          border: 0,
+          borderRadius: "8px",
+          backgroundColor: '#353646',
+        },
+        overlay: {
+          backgroundColor: "rgba(0, 0, 0, 0.6)"
+        },
+      }}
     >
       <Form
         ref={formRef}
@@ -146,18 +152,19 @@ export function CreateCharacterModal({
         <Flex 
           display="flex"
           flexDir="column"
-          >
+        >
           <InfosComponent />
 
-          <Flex
+          <Stack
             mt="4"
+            direction="row"
+            spacing="4"
           >
             <AttributesList setAttributeAmplifier={setAttributeAmplifier} />
 
             <Flex
               maxW="18rem"
               flexDir="column"
-              mr="6"
             >
               <Scope path="generalAmplifiers">
                 <ProficiencyBonus setAttributeAmplifier={setAttributeAmplifier} />
@@ -172,16 +179,46 @@ export function CreateCharacterModal({
               maxW="32rem"
               flexDir="column"
             >
-              <Scope path="attributesSummary">
-                <AttributesInfosSummary />
-              </Scope>
-              <Scope path="inventory">
-                <Inventory />
-              </Scope>
+              <AttributesInfosSummary />
+              
+              <Inventory />
             </Flex>
-          </Flex>
+
+            <Flex
+              flex="1"
+            >
+              <PersonalitySection />
+            </Flex>
+          </Stack>
+
+          <Stack
+            spacing="4"
+            mt="4"
+          >
+            <Stack
+              w="100%"
+              spacing="4"
+              direction="row"
+            >
+              <Scope path="inventory">
+                <CreateCharacterTextarea 
+                  name="languagesAndOtherSkills"
+                  placeholder="Línguas e outras perícias"
+                  w="45%"
+                  h="40"
+                />
+              </Scope>
+              
+              <AppearenceGrid />
+            </Stack>
+
+            <CharacterHistory />
+
+            <Triumph />
+
+            <SpellsSection />
+          </Stack>
         </Flex>
-        {/* <Button type="submit">submit</Button> */}
       </Form>
     </ReactModal>
   )
