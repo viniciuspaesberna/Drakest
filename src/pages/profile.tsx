@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import { Flex, Text, Divider } from "@chakra-ui/react";
+import { Flex, Text, Divider, useToast } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 
 import { ProfileHeader, ProfileAside, CharacterSection } from "../components/layout/profile";
@@ -14,11 +14,20 @@ import { AuthContext } from "../contexts/auth";
 export default function Profile(){
   const { user } = useContext(AuthContext)
   const router = useRouter()
+  const toast = useToast()
   const { isLoading } = useLoding()
   const { isOpen, onOpen, onClose } = useDisclosure()
   
   if(isLoading){    
     return <Loading />;
+  }
+
+  function onRequestClose() {
+    const isAccept = confirm("Ao fechar você perdera todos os dados, deseja fechar?")
+
+    if (isAccept) {
+      onClose()
+    } 
   }
 
 
@@ -30,7 +39,7 @@ export default function Profile(){
 
       <CreateCharacterModal 
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={onRequestClose}
       />
 
       <ProfileHeader user={user} />

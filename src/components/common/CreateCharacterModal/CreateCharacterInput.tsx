@@ -8,14 +8,14 @@ export function CreateCharacterModalInput({
   placeholder,
   ...rest
 }: InputProps){
-  const InputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const {fieldName, defaultValue, registerField } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: InputRef,
+      ref: inputRef,
       getValue: ref => {
         return ref.current.value
       },
@@ -31,7 +31,7 @@ export function CreateCharacterModalInput({
   return (
     <Input
       defaultValue={defaultValue}
-      ref={InputRef}
+      ref={inputRef}
       transition="background-color .4s"
       variant="unstyled"
       p="2"
@@ -52,6 +52,7 @@ export function CreateCharacterModalInput({
       }}
       title={placeholder}
       placeholder={placeholder}
+      onWheel={() => inputRef.current.blur()}
       {...rest}
     />
   )

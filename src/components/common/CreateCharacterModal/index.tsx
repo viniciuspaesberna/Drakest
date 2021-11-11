@@ -132,7 +132,7 @@ export function CreateCharacterModal({
         characterSheet: data
       }
     })
-  };
+  }
 
   return (
     <ReactModal
