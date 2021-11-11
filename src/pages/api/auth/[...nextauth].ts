@@ -3,6 +3,7 @@ import Providers from 'next-auth/providers'
 import { query as q } from 'faunadb'
 
 import { fauna } from '../../../services/fauna'
+import { v4 } from 'uuid'
 
 export default NextAuth({
   providers: [
@@ -14,8 +15,6 @@ export default NextAuth({
 
   callbacks: {
     async signIn(user, account, profile){
-      const { email } = user
-
       try {
         await fauna.query(
           q.If(
@@ -29,7 +28,10 @@ export default NextAuth({
             ),
             q.Create(
               q.Collection('users'),
-              {data: {email}}
+              {data: {
+                id: v4(),
+                ...user
+              }}
             ),
             q.Get(
               q.Match(

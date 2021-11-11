@@ -44,6 +44,7 @@ export function SkillListItem({
           bgColor="gray.700"
           fontSize="lg"
           textAlign="center"
+          isRequired
         />
       </Flex>
 

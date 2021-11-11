@@ -1,20 +1,26 @@
-import Head from "next/head";
-import { getSession } from "next-auth/client";
+import { useContext } from "react";
 import { GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
+import { useRouter } from "next/router";
+import Head from "next/head";
 import { Flex, Text, Divider } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 
 import { ProfileHeader, ProfileAside, CharacterSection } from "../components/layout/profile";
 import { CreateCharacterModal, Loading } from "../components/common";
 import { useLoding } from "../hooks/useLoding";
+import { AuthContext } from "../contexts/auth";
 
-export default function Profile({user}){
+export default function Profile(){
+  const { user } = useContext(AuthContext)
+  const router = useRouter()
   const { isLoading } = useLoding()
   const { isOpen, onOpen, onClose } = useDisclosure()
-
+  
   if(isLoading){    
     return <Loading />;
   }
+
 
   return (
     <>
@@ -71,8 +77,16 @@ export default function Profile({user}){
   )
 } 
 
-export const getServerSideProps: GetServerSideProps = async ({req}) => {
-  const session = await getSession({req}) 
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = parseCookies(ctx)
+
+  let session: boolean
+
+  if(cookies['next-auth.session-token'] || cookies['__Secure-next-auth.session-token']){
+    session = true
+  } else {
+    session = false 
+  }
 
   if(!session) {
     return {
@@ -83,11 +97,9 @@ export const getServerSideProps: GetServerSideProps = async ({req}) => {
     }
   }
 
-  const user = session.user
-
   return {
     props: {
-      user
+      session
     }
   }
 }

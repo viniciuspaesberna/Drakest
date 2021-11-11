@@ -50,6 +50,7 @@ export function AttributesListItem({
         onChange={() => {
           setAttributeAmplifier(inputName, 'all')
         }}
+        isRequired
         {...rest}
       />
       

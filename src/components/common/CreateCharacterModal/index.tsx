@@ -1,5 +1,5 @@
 import ReactModal from "react-modal";
-import React, { useRef, useCallback } from "react";
+import React, { useRef, useCallback, useContext } from "react";
 import { Scope } from "@unform/core";
 import { Form } from "@unform/web";
 
@@ -21,6 +21,9 @@ import { CharacterHistory } from "./components/CharacterHistory";
 import { Triumph } from "./components/Triumph";
 import { SpellsSection } from "./components/SpellsSection";
 
+import { api } from "../../../services/api";
+import { AuthContext } from "../../../contexts/auth";
+
 interface CreateCharacterModalProps{
   isOpen: boolean
   onClose: () => void
@@ -31,6 +34,7 @@ export function CreateCharacterModal({
   onClose,
 }: CreateCharacterModalProps){
   const formRef = useRef(null)
+  const { user } = useContext(AuthContext)
 
   
   const setAttributeAmplifier = useCallback((attributeName: string, attributeBased?: string) => {
@@ -120,8 +124,14 @@ export function CreateCharacterModal({
         )
   }, [])
       
-  function handleSubmit(data: any) {
+  async function handleSubmit(data: CharacterSheet) {
     console.log(data)
+    await api.post('characters', {
+      data: {
+        user,
+        characterSheet: data
+      }
+    })
   };
 
   return (

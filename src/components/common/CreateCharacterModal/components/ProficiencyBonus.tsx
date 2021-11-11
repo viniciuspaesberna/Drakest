@@ -33,6 +33,7 @@ export function ProficiencyBonus({setAttributeAmplifier}: ProficiencyBonusProps)
         fontWeight="bold"
         mr="2"
         onChange={() => setAttributeAmplifier('all', 'all')}
+        isRequired
       />
       <Text
         fontWeight="bold"

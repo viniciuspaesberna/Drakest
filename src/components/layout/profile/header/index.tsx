@@ -1,11 +1,13 @@
 import { Button, Flex, Icon, Link, Image } from "@chakra-ui/react";
 import { signOut } from "next-auth/client";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { VscSignOut } from "react-icons/vsc";
+import { AuthContext } from "../../../../contexts/auth";
 
 export function ProfileHeader({user}){
-  const router = useRouter()
+  const { customSignOut } = useContext(AuthContext)
 
   return (
     <Flex 
@@ -43,8 +45,7 @@ export function ProfileHeader({user}){
             outline: "none"
           }}
           onClick={() => {
-            signOut()
-            router.push('/')
+            customSignOut()
           }}
         >
           <VscSignOut size="24" />

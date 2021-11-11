@@ -43,6 +43,7 @@ export function SummaryItem({
         textAlign="center"
         p="2"
         fontSize="5xl"
+        isRequired
       />
     </Flex>
   )

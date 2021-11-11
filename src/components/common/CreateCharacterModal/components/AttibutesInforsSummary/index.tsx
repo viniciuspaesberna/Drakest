@@ -59,6 +59,7 @@ export function AttributesInfosSummary(){
                 _hover={{}}
                 textAlign="center"
                 fontSize="5xl"
+                isRequired
               />
             </Flex>
             
@@ -94,6 +95,7 @@ export function AttributesInfosSummary(){
                   border="none"
                   textAlign="center"
                   fontSize="5xl"
+                  isRequired
                 />
               </Flex>
 

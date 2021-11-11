@@ -7,7 +7,7 @@ interface AuthProviderProps{
 
 interface AuthContextData{
   user: User | null
-  custonSignOut: () => void
+  customSignOut: () => void
 }
 
 export const AuthContext = createContext({} as AuthContextData)
@@ -31,7 +31,7 @@ export function AuthProvider({ children }: AuthProviderProps){
     setUser(newUser)
   }, [])
 
-  function custonSignOut() {
+  function customSignOut() {
     signOut()
     localStorage.setItem("@Auth:currentUser", null)
   }
@@ -40,7 +40,7 @@ export function AuthProvider({ children }: AuthProviderProps){
     <AuthContext.Provider
       value={{
         user,
-        custonSignOut
+        customSignOut
       }}
     >
       {children}

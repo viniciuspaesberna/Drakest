@@ -45,11 +45,11 @@ export function SpellListItem({
         borderBottom="1px solid #9699b0"
       >
         <CreateCharacterModalCheckBox
-          name={`${line}-Checkbox-level${level}`}
+          name={`${line}CheckboxLevel${level}`}
         />
 
         <CreateCharacterModalInput 
-          name={`${line}-SpellName-level${level}`}
+          name={`${line}SpellNameLevel${level}`}
           fontSize="lg"
           ml="2"
           bgColor="transparent"

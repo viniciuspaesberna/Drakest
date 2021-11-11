@@ -11,7 +11,7 @@ import SocketService from '../../../../services/socketService';
 
 
 function LoginSection() {
-  const { user, custonSignOut } = useContext(AuthContext)
+  const { user, customSignOut } = useContext(AuthContext)
 
   useEffect(() => {
     if(user){
@@ -40,7 +40,7 @@ function LoginSection() {
       </Link>
       { isWideVersion && (
         <Button
-          onClick={() => custonSignOut()}
+          onClick={() => customSignOut()}
           p={0}
           bg="whiteAlpha.900"
           _hover={{

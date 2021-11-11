@@ -15,6 +15,7 @@ export function DiceInput({ name }: DiceInputProps){
             name={`${name}DiceAmount`}
             textAlign="center"
             bgColor="gray.700"
+            isRequired
           />
           
           <Text fontSize="3xl" color="" fontWeight="500">D</Text>
@@ -23,6 +24,7 @@ export function DiceInput({ name }: DiceInputProps){
             name={`${name}DiceSize`} 
             textAlign="center"
             bgColor="gray.700"
+            isRequired
           />
         </Stack>
       </Scope>

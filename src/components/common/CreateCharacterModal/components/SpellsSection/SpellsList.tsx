@@ -40,14 +40,12 @@ export function SpellsList({
     for(let i = 1; i <= linesNumber; i++){
       newlines.push({
         name: 'line' + i,
-        i: 'line' + i + `-level ${level}`,
+        i: 'line' + i + `Level ${level}`,
       })
     }
 
     setLines(newlines)
-  }, [])
-
-  
+  }, [])  
 
   return (
     <Scope path={`level${level}`}>
@@ -92,7 +90,7 @@ export function SpellsList({
               justify="space-around"
             >
               <CreateCharacterModalInput 
-                name={`totalSpace-level${level}`}
+                name={`totalSpaceLevel${level}`}
                 type="number"
                 placeholder="Total: 12"
                 isReadOnly
@@ -108,7 +106,7 @@ export function SpellsList({
                 onChange={e => SpellsLines(e.target.value)}
               />
               <CreateCharacterModalInput 
-                name={`usingSpace-level${level}`}
+                name={`usingSpaceLevel${level}`}
                 type="number"
                 placeholder={`Utilizado: ${usingLines}`}
                 isReadOnly
