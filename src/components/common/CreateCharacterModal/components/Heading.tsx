@@ -12,23 +12,26 @@ function Heading({onRequestClose}: HeadingProps){
   return (
     <ChakraHeading
       display="flex"
-      alignItems="center"
-      justifyContent="flex-end"
-      color="gray.900"
+      justifyContent="flex-end"      
       mb="6"
+      color="gray.900"
+      position="relative"
     >
-      <Flex align="center" justify="space-between" w="100px">
+      <Flex 
+        align="center" 
+        justify="space-between" 
+        w="100px"
+        position="fixed"
+        zIndex="5"
+      >
         <IconButton
           type="submit"
           colorScheme="yellow"
           _focus={{
             outline: "none"
           }}
-          aria-label="Fechar"
+          aria-label="Salvar"
           icon={<FiSave />}
-          // _hover={{
-          //   filter: "brightness(.2)"
-          // }}
         />
         
         <IconButton
