@@ -1,9 +1,14 @@
-import ReactModal from "react-modal";
 import React, { useRef, useCallback, useContext } from "react";
 import { Scope } from "@unform/core";
 import { Form } from "@unform/web";
 
-import { Flex, Stack } from "@chakra-ui/react";
+import { 
+  Flex, 
+  Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent
+} from "@chakra-ui/react";
 
 import Heading from "./components/Heading";
 import { AttributesList } from "./components/AttributesList";
@@ -23,19 +28,22 @@ import { SpellsSection } from "./components/SpellsSection";
 
 import { api } from "../../../services/api";
 import { AuthContext } from "../../../contexts/auth";
+import { v4 } from "uuid";
+import axios from "axios";
 
 interface CreateCharacterModalProps{
   isOpen: boolean
   onClose: () => void
+  close: () => void
 }
 
 export function CreateCharacterModal({
   isOpen,
   onClose,
+  close
 }: CreateCharacterModalProps){
   const formRef = useRef(null)
   const { user } = useContext(AuthContext)
-
   
   const setAttributeAmplifier = useCallback((attributeName: string, attributeBased?: string) => {
     const currentProficiencyBonusValue = formRef.current.getFieldValue('generalAmplifiers.proficiencyBonus')
@@ -125,111 +133,124 @@ export function CreateCharacterModal({
   }, [])
       
   async function handleSubmit(data: CharacterSheet) {
-    console.log(data)
+
     await api.post('characters', {
       data: {
         user,
-        characterSheet: data
+        characterSheet: {
+          ...data,
+          appearence: {
+            ...data.appearence,
+          }
+        }
       }
     })
+    close()
   }
 
   return (
-    <ReactModal
+    <Modal
       isOpen={isOpen}
-      onRequestClose={onClose}
-      ariaHideApp={false}
-      style={{
-        content: {
-          maxWidth: "1420px",
-          width: "100%",
-          margin: '0 auto 0 auto',
-          border: 0,
-          borderRadius: "8px",
-          backgroundColor: '#353646',
-        },
-        overlay: {
-          backgroundColor: "rgba(0, 0, 0, 0.6)"
-        },
-      }}
+      onClose={close}
     >
-      <Form
-        ref={formRef}
-        onSubmit={handleSubmit}
+      <ModalOverlay bg="rgba(0, 0, 0, 0.6)" />
+      <ModalContent
+        maxW="1420px"
+        width="100%"
+        margin="auto"
+        border="0"
+        p="4"
+        my="6"
+        borderRadius="8px"
+        bg="#353646"
+        sx={{
+          "::-webkit-scrollbar": {
+            display: "none"
+          }
+        }}
       >
-        <Heading onRequestClose={onClose} />
-
-        <Flex 
-          display="flex"
-          flexDir="column"
+        <Form
+          ref={formRef}
+          onSubmit={handleSubmit}
+          style={{
+            position: "relative"
+          }}
         >
-          <InfosComponent />
+          <Heading onRequestClose={onClose} />
 
-          <Stack
-            mt="4"
-            direction="row"
-            spacing="4"
+          <Flex 
+            mt="14"
+            display="flex"
+            flexDir="column"
           >
-            <AttributesList setAttributeAmplifier={setAttributeAmplifier} />
+            <InfosComponent />
 
-            <Flex
-              maxW="18rem"
-              flexDir="column"
-            >
-              <Scope path="generalAmplifiers">
-                <ProficiencyBonus setAttributeAmplifier={setAttributeAmplifier} />
-                
-                <SavingThrowsList setAttributeAmplifier={setAttributeAmplifier} />
-                
-                <SkillsList setAttributeAmplifier={setAttributeAmplifier} />
-              </Scope>
-            </Flex>
-
-            <Flex
-              maxW="32rem"
-              flexDir="column"
-            >
-              <AttributesInfosSummary />
-              
-              <Inventory />
-            </Flex>
-
-            <Flex
-              flex="1"
-            >
-              <PersonalitySection />
-            </Flex>
-          </Stack>
-
-          <Stack
-            spacing="4"
-            mt="4"
-          >
             <Stack
-              w="100%"
-              spacing="4"
+              mt="4"
               direction="row"
+              spacing="4"
             >
-              <Scope path="inventory">
-                <CreateCharacterTextarea 
-                  name="languagesAndOtherSkills"
-                  placeholder="Línguas e outras perícias"
-                  w="45%"
-                  h="40"
-                />
-              </Scope>
-              
-              <AppearenceGrid />
+              <AttributesList setAttributeAmplifier={setAttributeAmplifier} />
+
+              <Flex
+                maxW="18rem"
+                flexDir="column"
+              >
+                <Scope path="generalAmplifiers">
+                  <ProficiencyBonus setAttributeAmplifier={setAttributeAmplifier} />
+                  
+                  <SavingThrowsList setAttributeAmplifier={setAttributeAmplifier} />
+                  
+                  <SkillsList setAttributeAmplifier={setAttributeAmplifier} />
+                </Scope>
+              </Flex>
+
+              <Flex
+                maxW="32rem"
+                flexDir="column"
+              >
+                <AttributesInfosSummary />
+                
+                <Inventory />
+              </Flex>
+
+              <Flex
+                flex="1"
+              >
+                <PersonalitySection />
+              </Flex>
             </Stack>
 
-            <CharacterHistory />
+            <Stack
+              spacing="4"
+              mt="4"
+            >
+              <Stack
+                w="100%"
+                spacing="4"
+                direction="row"
+              >
+                <Scope path="inventory">
+                  <CreateCharacterTextarea 
+                    name="languagesAndOtherSkills"
+                    placeholder="Línguas e outras perícias"
+                    w="45%"
+                    h="40"
+                  />
+                </Scope>
+                
+                <AppearenceGrid />
+              </Stack>
 
-            <Triumph />
+              <CharacterHistory />
 
-            <SpellsSection />
-          </Stack>
-        </Flex>
-      </Form>
-    </ReactModal>
+              <Triumph />
+
+              <SpellsSection />
+            </Stack>
+          </Flex>
+        </Form>
+      </ModalContent>
+    </Modal>
   )
 }

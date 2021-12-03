@@ -1,7 +1,7 @@
-import { Flex, Text, Stack } from "@chakra-ui/react";
+import { Flex, Text, Stack, CircularProgress } from "@chakra-ui/react";
 import { Scope } from "@unform/core";
-import { CreateCharacterModalInput } from "../CreateCharacterInput";
 import { CreateCharacterTextarea } from "../CreateCharacterTextarea";
+import { ImagePreview } from "./ImagePreview";
 
 export function CharacterHistory(){
   return (
@@ -23,14 +23,7 @@ export function CharacterHistory(){
         >
           Avatar
         </Text>
-        <Scope path="appearence">
-          <CreateCharacterModalInput 
-            name="imageInput"
-            type="file"
-            w="100%"
-            h="100%"
-          />
-        </Scope>
+        <ImagePreview />
       </Flex>
 
       <Scope path="infos">

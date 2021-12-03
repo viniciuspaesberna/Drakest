@@ -1,8 +1,8 @@
-import { CreateCharacterModalInput } from "../CreateCharacterInput";
 import { CreateCharacterTextarea } from "../CreateCharacterTextarea";
 
 import { Stack, Flex, Text } from "@chakra-ui/react";
 import { Scope } from "@unform/core";
+import { CreateCharacterFileInput } from "../CreateCharacterFileInput";
 
 export function Triumph(){
   return (
@@ -45,12 +45,8 @@ export function Triumph(){
             Imagem
           </Text>
 
-          <CreateCharacterModalInput 
-            name="orgImage"
-            type="file"
-            _hover={{}}
-            _focus={{}}
-            
+          <CreateCharacterFileInput
+            name="orgImage"            
           />
         </Flex>
       
