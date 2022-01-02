@@ -4,9 +4,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/client";
 
-import { Flex, useDisclosure } from "@chakra-ui/react";
+import { Flex, useDisclosure, VStack } from "@chakra-ui/react";
 
-import { DicesSection, Characters, CharacterSheetModal, RoomHeader } from "../../components/layout/room";
+import { DicesSection, Characters, CharacterSheetModal, RoomHeader, TimersSection } from "../../components/layout/room";
 import { Loading } from "../../components/common/Loading";
 import { useLoding } from "../../hooks/useLoding";
 import SocketService from '../../services/socketService';
@@ -53,16 +53,19 @@ export default function Room({ roomId }){
         <RoomHeader roomId={roomId} />
 
         <Flex h="95vh">
-          <Flex
+          <VStack
             w="30rem"
             h="100%"
             bg="gray.900"
             rounded="3xl" 
+            spacing="2"
             mx="6"
             mb="4"
           >
             <DicesSection />
-          </Flex>
+
+            <TimersSection />
+          </VStack>
 
           <Flex align="center" w="100%"  ml="auto" maxW="400px">
             <Characters openCharacterSheet={onOpen} />

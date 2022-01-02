@@ -74,11 +74,10 @@ export function CustomDices(){
       </Flex>
       <Button 
         type="submit"
-        
         m="2"
         p="2"
-        
         fontSize="md"
+        fontWeight="bold"
         colorScheme="yellow"
       >
         Rolar
