@@ -2,10 +2,10 @@ import { useContext, useEffect } from "react";
 
 import { Flex, Text } from "@chakra-ui/react";
 
-import socketService from "../../../../services/socketService";
-import roomService from "../../../../services/roomService";
-import { DicesContext } from "../../../../contexts/DicesContext";
-import { SectionHeading } from "../../../common/Section/SectionHeading";
+import socketService from "../../../../../services/socketService";
+import roomService from "../../../../../services/roomService";
+import { DicesContext } from "../../../../../contexts/DicesContext";
+import { SectionHeading } from "../../../../common/Section/SectionHeading";
 import { CustomDices } from "./CustomDices";
 import { Dices } from "./Dices";
 
@@ -29,7 +29,7 @@ export function DicesSection(){
       as="section"
       flexDir="column"
       w="100%"
-      h="fit-content"
+      h="100%"
     >
       <SectionHeading name="Dados" />
       

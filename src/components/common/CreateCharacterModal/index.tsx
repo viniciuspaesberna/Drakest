@@ -163,11 +163,6 @@ export function CreateCharacterModal({
         my="6"
         borderRadius="8px"
         bg="#353646"
-        sx={{
-          "::-webkit-scrollbar": {
-            display: "none"
-          }
-        }}
       >
         <Form
           ref={formRef}

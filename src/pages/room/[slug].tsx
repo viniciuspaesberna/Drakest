@@ -6,7 +6,7 @@ import { getSession } from "next-auth/client";
 
 import { Flex, useDisclosure } from "@chakra-ui/react";
 
-import { DicesSection, Characters, CharacterSheetModal, RoomHeader } from "../../components/layout/room";
+import { Characters, CharacterSheetModal, RoomHeader, Aside } from "../../components/layout/room";
 import { Loading } from "../../components/common/Loading";
 import { useLoding } from "../../hooks/useLoding";
 import SocketService from '../../services/socketService';
@@ -49,24 +49,21 @@ export default function Room({ roomId }){
         onRequestClose={onClose}
       />
 
-      <Flex w="100vw" h="100vh" flexDir="column">
+      <Flex 
+        flexDir="column"
+        h="100vh"
+      >
         <RoomHeader roomId={roomId} />
 
-        <Flex h="95vh">
-          <Flex
-            w="30rem"
-            h="100%"
-            bg="gray.900"
-            rounded="3xl" 
-            mx="6"
-            mb="4"
-          >
-            <DicesSection />
-          </Flex>
+        <Flex
+          h="100%"
+          position="relative"
+        >
+          <Aside />
 
           <Flex align="center" w="100%"  ml="auto" maxW="400px">
-            <Characters openCharacterSheet={onOpen} />
           </Flex>
+          <Characters openCharacterSheet={onOpen} />
         </Flex>
       </Flex>
     </DicesProvider>

@@ -1,8 +1,8 @@
 import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 import { useContext } from "react";
 import { FormEvent, useRef } from "react";
-import { DicesContext } from "../../../../contexts/DicesContext";
-import { Input } from "../../../common/Form/Input";
+import { DicesContext } from "../../../../../contexts/DicesContext";
+import { Input } from "../../../../common/Form/Input";
 
 
 export function CustomDices(){

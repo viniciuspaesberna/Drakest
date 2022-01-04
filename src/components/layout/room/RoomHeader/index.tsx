@@ -1,6 +1,7 @@
-import { BiArrowBack } from 'react-icons/bi' 
-import { FiCopy } from 'react-icons/fi';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { FiCopy } from 'react-icons/fi';
+import { BiArrowBack } from 'react-icons/bi' 
+import { IoMenu } from 'react-icons/io5' 
 
 import { Button, Flex, Icon, Text, Link, useToast } from "@chakra-ui/react";
 
@@ -12,21 +13,50 @@ export function RoomHeader({roomId}: RoomHeaderProps){
   const toast = useToast()
 
   return(
-    <Flex h="2rem" align="center" justify="space-between" mx="6" >
-      <Link href="/">
+    <Flex 
+      as="header"
+      h="14" 
+      align="center" 
+      justify="space-between" 
+      maxW="96%"
+      w="100%"
+      mx="auto"
+    >
+      <Flex
+        align="center"      
+      >
+        <Link href="/">
+          <Icon
+            as={BiArrowBack}
+            w="6"
+            mt="-1"
+            h="6"
+            _hover={{
+              transform: "scale(1.1)",
+              cursor: 'pointer'
+            }}
+          />
+        </Link>
+
         <Icon
-          as={BiArrowBack}
+          as={IoMenu}
           w="6"
           h="6"
+          ml="4"
           _hover={{
             transform: "scale(1.1)",
             cursor: 'pointer'
           }}
         />
-      </Link>
+      </Flex>
+      
       <CopyToClipboard text={roomId}>
         <Button
+          p="3"
           colorScheme="yellow"
+          _focus={{
+            outlineColor: "green.300",
+          }}
           onClick={() =>{
             toast.closeAll()
             toast({

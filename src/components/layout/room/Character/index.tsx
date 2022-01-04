@@ -1,5 +1,4 @@
-import { Avatar, Flex, Stack } from "@chakra-ui/react";
-import { useState } from "react";
+import { VStack } from "@chakra-ui/react";
 import { CharacterDetails } from "./CharacterDetails";
 
 interface CharactersProps{
@@ -7,48 +6,22 @@ interface CharactersProps{
 }
 
 export function Characters({ openCharacterSheet }: CharactersProps){
-  const [detailsVisibility, setDetailsVisibility] = useState(false)
-
   return(
-    <Stack
+    <VStack
       spacing="1rem"
-      direction="column"
-      w="100%"
-      justify="right"
+      w="25rem"
+      right="0"
+      bg="blue"
+      py="2"
+      my="auto"
+      position="absolute"
+      zIndex="10"
+      display="flex"
+      align="flex-end"
     >
-      <Flex
-        w="30%"
-        align="center"
-        justify="flex-end"
-        bg="gray.900"
-        ml="auto"
-        py="6"
-        px="4"
-        borderRadius="4rem 0 0 4rem"
-        overflow="hidden"
-        transition="width 1s"
-        onMouseEnter={() => {
-          setDetailsVisibility(true)
-        }}
-        onMouseLeave={() => {
-          setDetailsVisibility(false)
-        }}
-        _hover={{
-          w: '100%',
-        }}
-      >
-        { detailsVisibility &&  
-          <CharacterDetails
-            openCharacterSheet={openCharacterSheet}
-          />
-        }
-        <Avatar
-          size="lg"
-          src="https://github.com/HaloSara121.png"
-          alt="HaloSara"
-          title="HaloSara121"
-        />
-      </Flex>
-    </Stack>
+      <CharacterDetails 
+        openCharacterSheet={openCharacterSheet}
+      />
+    </VStack>
   )
 }
