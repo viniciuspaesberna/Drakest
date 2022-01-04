@@ -21,13 +21,19 @@ export function CharacterSection({
       const response = await api.get('characters', {
         params: {
           email: user.email
-        }
+        }, 
+
+      
       })
 
       setCharacters(response.data.characters)
     }
 
     getCharacters()
+  }, [])
+
+  useEffect(() => {
+    
   }, [])
 
   return (
@@ -40,36 +46,26 @@ export function CharacterSection({
     >
       <SectionHeading name="Personagens" mx="auto" />
 
-      { characters === [] ? 
-        (
-          <Spinner 
-            alignSelf="center"
-            m="10"
-            size="lg"
-          />
-        ) : (
-          <SimpleGrid
-            overflow="auto"
-            templateColumns={["1fr","1fr 1fr 1fr"]}
-            spacing="4"
-            w="100%"
-            mb="4"
-            px="4"
-            rounded="md"
-          >
-            <AddCharacterButton onOpen={onOpen} />
-            {
-              characters.map(character => (
-                <CharacterListItem 
-                  key={character.data.id} 
-                  image="https://github.com/HaloSara121.png" 
-                  name={character.data.characterSheet.infos.name} 
-                />
-              ))
-            }
-          </SimpleGrid>
-        )
-      }
+      <SimpleGrid
+        overflow="auto"
+        templateColumns={["1fr","1fr 1fr 1fr"]}
+        spacing="4"
+        w="100%"
+        mb="4"
+        px="4"
+        rounded="md"
+      >
+        <AddCharacterButton onOpen={onOpen} />
+        {
+          characters.map(character => (
+            <CharacterListItem 
+              key={character.data.id} 
+              image="https://github.com/HaloSara121.png" 
+              name={character.data.characterSheet.infos.name} 
+            />
+          ))
+        }
+      </SimpleGrid>
     </Section>
   )
 }

@@ -2,7 +2,7 @@ import { Scope } from "@unform/core";
 import { useCallback, useState } from "react";
 import { v4 } from "uuid";
 import axios, { AxiosRequestConfig } from "axios";
-import { FileWithPath } from "react-dropzone"
+// import { FileWithPath } from "react-dropzone"
 
 import { CircularProgress, Image, Button } from "@chakra-ui/react";
 

@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { DicesSection } from "./DicesSection";
+import { DicesSection } from "../DicesSection";
 
 export function Aside(){
   return (

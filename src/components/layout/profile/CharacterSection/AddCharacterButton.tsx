@@ -17,6 +17,7 @@ export function AddCharacterButton({
       justify="center"
       bg="gray.700"
       rounded="md"
+      p="10"
       transition="filter 300ms"
       _hover={{
         filter: "brightness(.8)"

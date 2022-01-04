@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { Flex, Image, Stack } from '@chakra-ui/react'
 
 import { Loading } from '../components/common'
-import { HomeHeader, JoinRoomForm, CreateRoomForm } from '../components/layout/home'
+import { HomeHeader, JoinRoomForm, CreateRoomForm, Aside } from '../components/layout/home'
 import { useLoding } from '../hooks/useLoding'
 
 export default function Home() {
