@@ -1,7 +1,6 @@
 import { Characters } from "./Character";
 import { CharacterSheetModal } from "./CharacterSheetModal";
 import { RoomHeader } from "./RoomHeader";
-import { DicesSection } from "./DicesSection";
-import { TimersSection } from "./TimersSection";
+import { Aside } from "./Aside"
 
-export { Characters, CharacterSheetModal, DicesSection, RoomHeader, TimersSection } 
+export { Characters, CharacterSheetModal, RoomHeader, Aside } 

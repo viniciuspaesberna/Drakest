@@ -1,15 +1,21 @@
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { FiCopy } from 'react-icons/fi';
 import { BiArrowBack } from 'react-icons/bi' 
-import { IoMenu } from 'react-icons/io5' 
+import { IoMenu, IoClose } from 'react-icons/io5' 
 
-import { Button, Flex, Icon, Text, Link, useToast } from "@chakra-ui/react";
+import { Button, Flex, Icon, Text, Link, useToast, HStack } from "@chakra-ui/react";
 
 interface RoomHeaderProps{
   roomId: string
+  toggleAside: (value: boolean) => void
+  asideIsOpen: boolean
 }
 
-export function RoomHeader({roomId}: RoomHeaderProps){
+export function RoomHeader({
+  roomId,
+  toggleAside,
+  asideIsOpen
+}: RoomHeaderProps){
   const toast = useToast()
 
   return(
@@ -18,11 +24,14 @@ export function RoomHeader({roomId}: RoomHeaderProps){
       h="14" 
       align="center" 
       justify="space-between" 
-      maxW="96%"
       w="100%"
+      px="6"
+      py="2"
       mx="auto"
+      borderBottom="1px solid #616480"
     >
-      <Flex
+      <HStack
+        spacing="4"
         align="center"      
       >
         <Link href="/">
@@ -39,15 +48,20 @@ export function RoomHeader({roomId}: RoomHeaderProps){
         </Link>
 
         <Icon
-          as={IoMenu}
+          as={asideIsOpen ? IoClose : IoMenu}
           w="6"
           h="6"
           ml="4"
+          onClick={() => toggleAside(!asideIsOpen)}
           _hover={{
             transform: "scale(1.1)",
             cursor: 'pointer'
           }}
         />
+      </HStack>
+
+      <Flex>
+        
       </Flex>
       
       <CopyToClipboard text={roomId}>

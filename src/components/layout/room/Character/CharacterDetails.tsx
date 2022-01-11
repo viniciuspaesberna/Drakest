@@ -22,7 +22,7 @@ export function CharacterDetails({openCharacterSheet}: CharacterDatailsProps){
       px="4"
       borderRadius="4rem 0 0 4rem"
       overflow="hidden"
-      transition="width 1s ease-out"
+      transition="width .8s ease-out"
       onMouseEnter={() => {
         setDetailsVisibility(true)
       }}

@@ -29,7 +29,6 @@ export function DicesSection(){
       as="section"
       flexDir="column"
       w="100%"
-      h="100%"
     >
       <SectionHeading name="Dados" />
       

@@ -10,15 +10,21 @@ export function Characters({ openCharacterSheet }: CharactersProps){
     <VStack
       spacing="1rem"
       w="25rem"
+      h="100%"
       right="0"
-      bg="blue"
       py="2"
-      my="auto"
       position="absolute"
       zIndex="10"
       display="flex"
       align="flex-end"
+      justify="center"
     >
+      <CharacterDetails 
+        openCharacterSheet={openCharacterSheet}
+      />
+      <CharacterDetails 
+        openCharacterSheet={openCharacterSheet}
+      />
       <CharacterDetails 
         openCharacterSheet={openCharacterSheet}
       />
