@@ -64,7 +64,7 @@ export function Aside({
       animate={isOpen ? "visible" : "hidden"}
       h="100%"
       bg="gray.900"
-      rounded="3xl" 
+      rounded="3xl"
       spacing="2"
       mb="4"
       px="2"

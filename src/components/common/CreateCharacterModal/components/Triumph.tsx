@@ -5,6 +5,7 @@ import { Scope } from "@unform/core";
 import { CreateCharacterFileInput } from "../CreateCharacterFileInput";
 
 export function Triumph(){
+
   return (
     <Scope path="triumph">
 

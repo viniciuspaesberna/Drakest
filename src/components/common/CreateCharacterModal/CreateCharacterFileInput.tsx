@@ -6,7 +6,7 @@ import { useField } from "@unform/core"
 
 interface CreateCharacterFileInputProps{
   name?: string
-  onUpload: (file: any) => void
+  onUpload?: (file: any) => void
 }
 
 export function CreateCharacterFileInput({ name, onUpload }: CreateCharacterFileInputProps) {
