@@ -63,7 +63,10 @@ export function RoomHeader({
       </HStack>
 
       <Flex>
-        <Text>
+        <Text
+          fontSize="3xl"
+          fontWeight="bold"
+        >
           {roomName}
         </Text>
       </Flex>

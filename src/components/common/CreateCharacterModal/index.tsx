@@ -145,13 +145,14 @@ export function CreateCharacterModal({
         }
       }
     })
+
     close()
   }
 
   return (
     <Modal
       isOpen={isOpen}
-      onClose={close}
+      onClose={onClose}
     >
       <ModalOverlay bg="rgba(0, 0, 0, 0.6)" />
       <ModalContent

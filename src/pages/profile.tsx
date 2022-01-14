@@ -39,7 +39,7 @@ export default function Profile(){
 
       <CreateCharacterModal 
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={onRequestClose}
         close={onClose}
       />
 
