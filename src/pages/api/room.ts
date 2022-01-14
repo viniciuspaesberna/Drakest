@@ -19,8 +19,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET'){
     const { roomId } = req.query
 
-    const currentRoomIdExists = await fauna.query(
-      q.Exists(
+    const currentRoom: any = await fauna.query(
+      q.Get(
         q.Match(
           q.Index('room_by_id'),
           roomId
@@ -28,16 +28,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       )
     )
 
-    if(currentRoomIdExists){
-      return res.status(200).json({roomId})
-    }
-    
-    return res.status(404).json({error: "Room id not found"})
+    // console.log(currentRoom)
+
+    if(!!currentRoom){
+      return res.status(200).json({room: currentRoom.data })
+    } else {
+      return res.status(404).json({error: "Room id not found"})
+    } 
   }
 
-
+  
   if (req.method === 'POST'){
     const session = await getSession({req})
+ 
+    const { name } = req.body
 
     const roomId = generateRoomId()
     
@@ -66,7 +70,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         ),
         q.Create(
           q.Collection('rooms'),
-          {data: {id: roomId, room_owner: user.data.email}}
+          {data: {
+            id: roomId, 
+            room_owner: user.data.email,
+            name
+          }}
         ),
         q.Get(
           q.Match(

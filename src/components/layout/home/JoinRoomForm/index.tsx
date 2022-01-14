@@ -60,8 +60,10 @@ export function JoinRoomForm(){
               roomId
             }
           })
-        
-          router.push(`/room/${res.data.roomId}`)
+          
+          console.log(res.data.room.id)
+
+          router.push(`/room/${res.data.room.id}`)
         } else {
           setIsloading(false)
           toast({
@@ -103,6 +105,7 @@ export function JoinRoomForm(){
         name="roomId"
         type="number"
         placeholder="ID da sala"
+        isRequired  
         ref={enterRoomInputRef}
       />
     </Form>

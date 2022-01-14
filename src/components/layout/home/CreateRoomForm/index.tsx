@@ -33,7 +33,9 @@ export function CreateRoomForm(){
     
     try {
       const socket = socketService.socket
-      const res = await api.post('/room')
+      const res = await api.post('/room', {
+        name: createRoomInputRef.current.value
+      })
 
       const isAbleToJoinRoom = await roomService.joinGameRoomRequest(socket, res.data.roomId)
       if(isAbleToJoinRoom) return router.push(`/room/${res.data.roomId}`)
@@ -59,9 +61,9 @@ export function CreateRoomForm(){
       iconDescriptionMessage="Essa senha será utilizada para realizar ações como adiministrador da sala"
     >
       <Input
-        name="roomPassword"
-        type="password"
-        placeholder="Criar senha da sala"
+        name="roomName"
+        type="text"
+        placeholder="Nome da sala/RPG"
         ref={createRoomInputRef}
       />
     </Form>

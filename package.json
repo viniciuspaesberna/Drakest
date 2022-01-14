@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^1.6.5",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
+    "@stitches/react": "^1.2.6",
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
     "axios": "^0.21.1",

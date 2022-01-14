@@ -9,12 +9,14 @@ interface RoomHeaderProps{
   roomId: string
   toggleAside: (value: boolean) => void
   asideIsOpen: boolean
+  roomName?: string
 }
 
 export function RoomHeader({
   roomId,
   toggleAside,
-  asideIsOpen
+  asideIsOpen,
+  roomName
 }: RoomHeaderProps){
   const toast = useToast()
 
@@ -61,7 +63,9 @@ export function RoomHeader({
       </HStack>
 
       <Flex>
-        
+        <Text>
+          {roomName}
+        </Text>
       </Flex>
       
       <CopyToClipboard text={roomId}>

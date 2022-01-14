@@ -12,12 +12,14 @@ import { useLoding } from "../../hooks/useLoding";
 import SocketService from '../../services/socketService';
 import roomService from '../../services/roomService';
 import { DicesProvider } from '../../contexts/DicesContext';
+import { api } from '../../services/api';
 
 export default function Room({ roomId }){
   const router = useRouter()
   const { isLoading } = useLoding()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [asideIsOpen, setAsideIsOpen] = useState(false)
+  const [room, setRoom] = useState<Room>()
 
   useEffect(() => {
     if(!SocketService.socket){
@@ -32,6 +34,22 @@ export default function Room({ roomId }){
         router.push('/')
       }
     }
+  }, [])
+
+  useEffect(() => {
+    const getRoom = async () => {
+      const res = await api.get('/room', {
+        params: {
+          roomId
+        }
+      })
+
+      console.log(res.data.room)
+
+      setRoom(res.data.room)
+    }
+
+    getRoom()
   }, [])
   
   if(router.isFallback || isLoading){    
@@ -57,6 +75,7 @@ export default function Room({ roomId }){
           roomId={roomId} 
           toggleAside={setAsideIsOpen} 
           asideIsOpen={asideIsOpen} 
+          roomName={room?.name}
         />
 
         <Flex 

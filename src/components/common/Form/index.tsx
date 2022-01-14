@@ -14,7 +14,17 @@ interface FormProps {
   isLoading?: boolean
 }
 
-const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> = ({children, heading, submitButtonName, icon, submitAction, iconTypeMessage, iconTitleMessage, iconDescriptionMessage, isLoading}, ref) => {
+const FormBase: ForwardRefRenderFunction<HTMLFormElement, FormProps> = ({
+  children, 
+  heading, 
+  submitButtonName, 
+  icon, 
+  submitAction, 
+  iconTypeMessage, 
+  iconTitleMessage, 
+  iconDescriptionMessage, 
+  isLoading
+}, ref) => {
   const toast = useToast()
 
   return (

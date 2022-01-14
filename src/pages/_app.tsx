@@ -7,8 +7,11 @@ import { DicesProvider } from '../contexts/DicesContext'
 import { AuthProvider } from '../contexts/auth'
 
 import { theme } from '../styles/theme'
+import { global } from '../styles/global'
 
 function MyApp({ Component, pageProps }: AppProps) {
+  global()
+
   return (
     <Provider session={pageProps.session}>
       <AuthProvider>
