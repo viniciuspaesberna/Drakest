@@ -13,6 +13,7 @@ import SocketService from '../../services/socketService';
 import roomService from '../../services/roomService';
 import { DicesProvider } from '../../contexts/DicesContext';
 import { api } from '../../services/api';
+import { RoomProvider } from '../../contexts/RoomContext';
 
 export default function Room({ roomId }){
   const router = useRouter()
@@ -57,45 +58,46 @@ export default function Room({ roomId }){
   }
 
   return(
-    <DicesProvider roomId={roomId}>
-      <Head>
-        <title>Room-{roomId} | Drakest</title>
-      </Head>
-      
-      <CharacterSheetModal
-        isOpen={isOpen} 
-        onRequestClose={onClose}
-      />
-
-      <Flex 
-        flexDir="column"
-        h="100vh"
-      >
-        <RoomHeader 
-          roomId={roomId} 
-          toggleAside={setAsideIsOpen} 
-          asideIsOpen={asideIsOpen} 
-          roomName={room?.name}
+    <RoomProvider>
+      <DicesProvider roomId={roomId}>
+        <Head>
+          <title>Room-{roomId} | Drakest</title>
+        </Head>
+        
+        <CharacterSheetModal
+          isOpen={isOpen} 
+          onRequestClose={onClose}
         />
 
         <Flex 
-          h="100%"
-          py="2"
-          px="4"
-          position="relative"
+          flexDir="column"
+          h="100vh"
         >
-          <Aside isOpen={asideIsOpen} />
+          <RoomHeader 
+            roomId={roomId} 
+            toggleAside={setAsideIsOpen} 
+            asideIsOpen={asideIsOpen} 
+            roomName={room?.name}
+          />
 
-          <Flex
-            flex="1"
+          <Flex 
+            h="100%"
+            py="2"
+            px="4"
+            position="relative"
           >
-          <Image src="/images/bg.png"/>
-          </Flex>
+            <Aside isOpen={asideIsOpen} />
 
-          <Characters openCharacterSheet={onOpen} />
+            <Flex
+            >
+              {/* <Image src="/images/bg.png"/> */}
+            </Flex>
+
+            <Characters openCharacterSheet={onOpen} />
+          </Flex>
         </Flex>
-      </Flex>
-    </DicesProvider>
+      </DicesProvider>
+    </RoomProvider>
   )
 }
 

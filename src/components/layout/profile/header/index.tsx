@@ -1,6 +1,4 @@
 import { Button, Flex, Icon, Link, Image } from "@chakra-ui/react";
-import { signOut } from "next-auth/client";
-import { useRouter } from "next/router";
 import { useContext } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import { VscSignOut } from "react-icons/vsc";
@@ -56,12 +54,12 @@ export function ProfileHeader({user}){
       </Flex>
           
       <Image
-          src={user.image}
-          w="40"
-          m="auto"
-          mb="-5%"
-          rounded="full"
-        />
+        src={user.image}
+        w="40"
+        m="auto"
+        mb="-5%"
+        rounded="full"
+      />
     </Flex>
   )
 }

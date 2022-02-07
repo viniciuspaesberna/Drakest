@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "nookies";
 import { useRouter } from "next/router";
@@ -10,14 +10,12 @@ import { ProfileHeader, ProfileAside, CharacterSection } from "../components/lay
 import { CreateCharacterModal, Loading } from "../components/common";
 import { useLoding } from "../hooks/useLoding";
 import { AuthContext } from "../contexts/auth";
+import { getSession } from "next-auth/client";
 
-export default function Profile(){
-  const { user } = useContext(AuthContext)
-  const router = useRouter()
-  const toast = useToast()
+export default function Profile({ user }){
   const { isLoading } = useLoding()
   const { isOpen, onOpen, onClose } = useDisclosure()
-  
+
   if(isLoading){    
     return <Loading />;
   }
@@ -79,7 +77,7 @@ export default function Profile(){
             w="100%"
             color="white"
           >
-            <CharacterSection onOpen={onOpen} />
+            <CharacterSection onOpen={onOpen} user={user} />
           </Flex>
         </Flex>
       </Flex>
@@ -87,16 +85,8 @@ export default function Profile(){
   )
 } 
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const cookies = parseCookies(ctx)
-
-  let session: boolean
-
-  if(cookies['next-auth.session-token'] || cookies['__Secure-next-auth.session-token']){
-    session = true
-  } else {
-    session = false 
-  }
+export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
+  const session = await getSession({req})   
 
   if(!session) {
     return {
@@ -109,7 +99,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   return {
     props: {
-      session
+      user: session.user
     }
   }
 }

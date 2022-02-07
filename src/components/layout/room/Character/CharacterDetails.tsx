@@ -18,11 +18,12 @@ export function CharacterDetails({openCharacterSheet}: CharacterDatailsProps){
       bg="gray.900"
       justify="flex-end"
       ml="auto"
+      borderRadius="4rem 0 0 4rem"
       py="6"
       px="4"
-      borderRadius="4rem 0 0 4rem"
       overflow="hidden"
       transition="width .8s ease-out"
+      flexShrink={0}
       onMouseEnter={() => {
         setDetailsVisibility(true)
       }}

@@ -1,11 +1,23 @@
 import { Avatar, Flex, Text } from "@chakra-ui/react";
+import { useEffect } from "react";
 
-interface CharacterListItemProps{
-  image: string
-  name: string
+interface CharacterCardProps{
+  character: CharacterSheet
 }
 
-export function CharacterListItem({ image, name }: CharacterListItemProps){
+export function CharacterCard({
+  character
+}: CharacterCardProps) {
+  if (!character) {
+    return (
+      <Text>loading...</Text>
+    )
+  }
+
+  useEffect(() => {
+    // console.log(character.infos.name)
+  }, [])
+
   return (
     <Flex
       display="flex"
@@ -14,7 +26,7 @@ export function CharacterListItem({ image, name }: CharacterListItemProps){
       bg="gray.700"
       rounded="md"
     >
-      <Avatar src={image} size="xl" mx="auto" my="4" />
+      <Avatar src="https://github.com/HaloSara121.png" size="xl" mx="auto" my="4" />
 
       <Flex
         w="100%"
@@ -25,7 +37,7 @@ export function CharacterListItem({ image, name }: CharacterListItemProps){
           fontSize="large"
           fontWeight="bold"
         >
-          {name}
+          {character.infos?.name}
         </Text>
 
         <Flex>

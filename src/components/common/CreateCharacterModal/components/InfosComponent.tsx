@@ -4,7 +4,6 @@ import { Scope } from "@unform/core";
 import { Flex, SimpleGrid } from "@chakra-ui/react";
 
 import { CreateCharacterModalInput } from "../CreateCharacterInput";
-import { CurrentCharacterSheetContext } from "../../../../contexts/CurrentCharacterSheetContext";
 
 export function InfosComponent(){
   return (

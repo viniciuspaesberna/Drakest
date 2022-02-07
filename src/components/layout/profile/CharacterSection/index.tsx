@@ -4,14 +4,15 @@ import { IoIosRefresh } from "react-icons/io"
 import { Icon, SimpleGrid, Spinner } from "@chakra-ui/react";
 
 import { Section, SectionHeading } from "../../../common";
-import { CharacterListItem } from "./CharacterListItem";
 import { AddCharacterButton } from "./AddCharacterButton"
 import { api } from "../../../../services/api";
 import { AuthContext } from "../../../../contexts/auth";
 import { motion } from "framer-motion";
+import { CharacterCard } from "../../../common/CharacterCard";
 
 interface CharacterSectionProps{
   onOpen: () => void
+  user: User
 }
 
 const rotateVariants = {
@@ -27,9 +28,9 @@ const rotateVariants = {
 }
 
 export function CharacterSection({
-  onOpen
+  onOpen,
+  user
 }: CharacterSectionProps){
-  const { user } = useContext(AuthContext)
   const [characters, setCharacters] = useState([])
 
   useEffect(() => {
@@ -69,10 +70,9 @@ export function CharacterSection({
         <AddCharacterButton onOpen={onOpen} />
         {
           characters.map(character => (
-            <CharacterListItem 
-              key={character.data.id} 
-              image="https://github.com/HaloSara121.png" 
-              name={character.data.characterSheet.infos.name} 
+            <CharacterCard 
+              key={character.data.id}
+              character={character}
             />
           ))
         }

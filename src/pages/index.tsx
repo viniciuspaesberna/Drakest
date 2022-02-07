@@ -2,7 +2,7 @@ import { GetServerSideProps } from 'next'
 import { parseCookies } from 'nookies'
 import Head from 'next/head'
 
-import { Flex, Image, Stack } from '@chakra-ui/react'
+import { Flex, Image, Stack, Text } from '@chakra-ui/react'
 
 import { Loading } from '../components/common'
 import { HomeHeader, JoinRoomForm, CreateRoomForm, Aside } from '../components/layout/home'
@@ -30,7 +30,7 @@ export default function Home() {
         justify="center"
       >
         {/* <Aside /> */}
-
+    
         <Flex
           align="center"
           flexDir="column"
