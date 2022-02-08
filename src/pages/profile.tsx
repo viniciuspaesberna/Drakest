@@ -45,7 +45,7 @@ export default function Profile({ user }){
 
       <Flex 
         as="main"
-        maxW="1120px"
+        maxW="1360px"
         h="100%"
         w="100%"
         m="auto"

@@ -72,7 +72,8 @@ export function CharacterSection({
           characters.map(character => (
             <CharacterCard 
               key={character.data.id}
-              character={character}
+              characterId={character.data.id}
+              character={character.data.characterSheet}
             />
           ))
         }

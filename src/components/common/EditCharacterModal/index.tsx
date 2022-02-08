@@ -20,7 +20,7 @@ import { SkillsList } from "./components/SkillsList";
 import { AttributesInfosSummary } from "./components/AttibutesInforsSummary";
 import { Inventory } from "./components/Inventory";
 import { PersonalitySection } from "./components/PersonalitySection";
-import { CreateCharacterTextarea } from "./CreateCharacterTextarea";
+import { CreateCharacterTextarea } from "./CharacterTextarea";
 import { AppearenceGrid } from "./components/AppearenceGrid";
 import { CharacterHistory } from "./components/CharacterHistory";
 import { Triumph } from "./components/Triumph";
@@ -29,19 +29,22 @@ import { SpellsSection } from "./components/SpellsSection";
 import { api } from "../../../services/api";
 import { AuthContext } from "../../../contexts/auth";
 
-interface CreateCharacterModalProps{
+interface EditCharacterModalProps{
   isOpen: boolean
   onClose: () => void
   close: () => void
+  initialData: CharacterSheet
+  characterId: string
 }
 
-export function CreateCharacterModal({
+export function EditCharacterModal({
   isOpen,
   onClose,
-  close
-}: CreateCharacterModalProps){
+  close,
+  initialData,
+  characterId
+}: EditCharacterModalProps){
   const formRef = useRef(null)
-  const { user } = useContext(AuthContext)
   
   const setAttributeAmplifier = useCallback((attributeName: string, attributeBased?: string) => {
     const currentProficiencyBonusValue = formRef.current.getFieldValue('generalAmplifiers.proficiencyBonus')
@@ -132,16 +135,9 @@ export function CreateCharacterModal({
       
   async function handleSubmit(data: CharacterSheet) {
 
-    await api.post('characters', {
-      data: {
-        user,
-        characterSheet: {
-          ...data,
-          appearence: {
-            ...data.appearence,
-          }
-        }
-      }
+    await api.put('/characters', {
+      id: characterId,
+      newData: data
     })
 
     close()
@@ -166,9 +162,7 @@ export function CreateCharacterModal({
         <Form
           ref={formRef}
           onSubmit={handleSubmit}
-          style={{
-            position: "relative"
-          }}
+          initialData={initialData}
         >
           <Heading onRequestClose={onClose} />
 

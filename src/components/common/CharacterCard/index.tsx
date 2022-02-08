@@ -1,13 +1,21 @@
-import { Avatar, Flex, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Avatar, Flex, HStack, Icon, Text, useDisclosure } from "@chakra-ui/react";
+import { useCallback, useEffect } from "react";
+
+import { HiPencil, HiTrash } from "react-icons/hi"
+import { api } from "../../../services/api";
+import { EditCharacterModal } from "../EditCharacterModal";
 
 interface CharacterCardProps{
   character: CharacterSheet
+  characterId: string
 }
 
 export function CharacterCard({
-  character
+  character,
+  characterId
 }: CharacterCardProps) {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   if (!character) {
     return (
       <Text>loading...</Text>
@@ -15,8 +23,24 @@ export function CharacterCard({
   }
 
   useEffect(() => {
-    // console.log(character.infos.name)
+
   }, [])
+
+  const deleteCharacter = useCallback(async () => {
+    await api.delete("/characters", {
+      data: {
+        id: characterId
+      }
+    })
+  }, [])
+  
+  function onRequestClose() {
+    const isAccept = confirm("Ao fechar você perderá todos os dados, deseja fechar?")
+
+    if (isAccept) {
+      onClose()
+    }
+  }
 
   return (
     <Flex
@@ -26,7 +50,43 @@ export function CharacterCard({
       bg="gray.700"
       rounded="md"
     >
-      <Avatar src="https://github.com/HaloSara121.png" size="xl" mx="auto" my="4" />
+      <HStack
+        w="100%"
+        h="2"
+        py="2"
+        px="2"
+        align="flex-start"
+        justify="flex-end"
+      >
+        <Icon
+          as={HiPencil}
+          w="6"
+          h="6"
+          onClick={() => onOpen()}
+          _hover={{
+            transform: "scale(1.1)",
+            cursor: 'pointer'
+          }}
+        />
+
+        <Icon
+          as={HiTrash}
+          w="6"
+          h="6"
+          onClick={() => deleteCharacter()}
+          _hover={{
+            transform: "scale(1.1)",
+            cursor: 'pointer'
+          }}
+        />
+      </HStack>
+
+      <Avatar 
+        src="/images/defaultCharacter2.png" 
+        size="xl" 
+        mx="auto" 
+        my="4" 
+      />
 
       <Flex
         w="100%"
@@ -37,7 +97,7 @@ export function CharacterCard({
           fontSize="large"
           fontWeight="bold"
         >
-          {character.infos?.name}
+          {character.infos.name}
         </Text>
 
         <Flex>
@@ -49,6 +109,14 @@ export function CharacterCard({
           </Text>
         </Flex>
       </Flex>
+
+      <EditCharacterModal 
+        isOpen={isOpen}
+        onClose={onRequestClose}
+        close={onClose}
+        initialData={character}
+        characterId={characterId}
+      />
     </Flex>
   )
 }

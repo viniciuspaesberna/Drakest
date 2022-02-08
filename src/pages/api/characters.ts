@@ -43,7 +43,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if(req.method === "GET") {
-    const { email } = req.query
+    const { email, single } = req.query
+
 
     const charactersRefs = await fauna.query<any>(
       q.Paginate(
@@ -79,5 +80,50 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     } else {
       res.status(404).json({ error: "Characters not found!"})
     }
+  }
+
+  if(req.method === "DELETE") {
+    const { id } = req.body
+
+    const character = await fauna.query<any>(
+      q.Get(
+        q.Match(
+          q.Index("character_by_id"),
+          id
+        )
+      )
+    )
+
+    await fauna.query(
+      q.Delete(character.ref)
+    ).then(() => res.status(200).json({ success: true }))
+    
+  }
+
+  if(req.method === "PUT") {
+    const { id, newData } = req.body
+
+    const character = await fauna.query<any>(
+      q.Get(
+        q.Match(
+          q.Index("character_by_id"),
+          id
+        )
+      )
+    )
+
+
+    const putRes = await fauna.query(
+      q.Update(
+        character.ref,
+        { 
+          data: newData
+        } 
+      ),
+    )
+
+    console.log(putRes)
+
+    res.status(200).json({ success: true })
   }
 }
