@@ -38,7 +38,6 @@ export default function Profile({ user }){
       <CreateCharacterModal 
         isOpen={isOpen}
         onClose={onRequestClose}
-        close={onClose}
       />
 
       <ProfileHeader user={user} />

@@ -2,7 +2,7 @@ import { Scope } from "@unform/core";
 
 import { List, Text } from "@chakra-ui/react";
 
-import { SkillListItem } from "../components/SkillListItem";
+import { SkillListItem } from "./SkillListItem";
 
 interface SkillsListProps{
   setAttributeAmplifier: (attributeName: string, attributeBased: string) => void

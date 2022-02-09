@@ -7,20 +7,22 @@ import { Section, SectionHeading } from "../../../common";
 import { AddCharacterButton } from "./AddCharacterButton"
 import { api } from "../../../../services/api";
 import { AuthContext } from "../../../../contexts/auth";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { CharacterCard } from "../../../common/CharacterCard";
+import { ConfirmModal } from "../../../common/ConfirmModal";
 
 interface CharacterSectionProps{
   onOpen: () => void
   user: User
 }
 
-const rotateVariants = {
+const rotateVariants: Variants = {
   rotate: {
     rotate: [0, 1],
     transition: {
       rotate: {
         duration: .5,
+        type: "spring",
         ease: "easeInOut",
       },
     }

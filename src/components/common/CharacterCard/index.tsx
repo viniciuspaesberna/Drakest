@@ -3,7 +3,8 @@ import { useCallback, useEffect } from "react";
 
 import { HiPencil, HiTrash } from "react-icons/hi"
 import { api } from "../../../services/api";
-import { EditCharacterModal } from "../EditCharacterModal";
+import { DeleteButton } from "./DeleteButton";
+import { EditButton } from "./EditButton";
 
 interface CharacterCardProps{
   character: CharacterSheet
@@ -14,33 +15,6 @@ export function CharacterCard({
   character,
   characterId
 }: CharacterCardProps) {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
-  if (!character) {
-    return (
-      <Text>loading...</Text>
-    )
-  }
-
-  useEffect(() => {
-
-  }, [])
-
-  const deleteCharacter = useCallback(async () => {
-    await api.delete("/characters", {
-      data: {
-        id: characterId
-      }
-    })
-  }, [])
-  
-  function onRequestClose() {
-    const isAccept = confirm("Ao fechar você perderá todos os dados, deseja fechar?")
-
-    if (isAccept) {
-      onClose()
-    }
-  }
 
   return (
     <Flex
@@ -58,26 +32,13 @@ export function CharacterCard({
         align="flex-start"
         justify="flex-end"
       >
-        <Icon
-          as={HiPencil}
-          w="6"
-          h="6"
-          onClick={() => onOpen()}
-          _hover={{
-            transform: "scale(1.1)",
-            cursor: 'pointer'
-          }}
+        <EditButton 
+          character={character}
+          characterId={characterId}
         />
 
-        <Icon
-          as={HiTrash}
-          w="6"
-          h="6"
-          onClick={() => deleteCharacter()}
-          _hover={{
-            transform: "scale(1.1)",
-            cursor: 'pointer'
-          }}
+        <DeleteButton 
+          characterId={characterId}
         />
       </HStack>
 
@@ -110,13 +71,6 @@ export function CharacterCard({
         </Flex>
       </Flex>
 
-      <EditCharacterModal 
-        isOpen={isOpen}
-        onClose={onRequestClose}
-        close={onClose}
-        initialData={character}
-        characterId={characterId}
-      />
     </Flex>
   )
 }

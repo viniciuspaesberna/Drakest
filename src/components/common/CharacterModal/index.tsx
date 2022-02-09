@@ -20,7 +20,7 @@ import { SkillsList } from "./components/SkillsList";
 import { AttributesInfosSummary } from "./components/AttibutesInforsSummary";
 import { Inventory } from "./components/Inventory";
 import { PersonalitySection } from "./components/PersonalitySection";
-import { CreateCharacterTextarea } from "./CharacterTextarea";
+import { CreateCharacterTextarea } from "./CreateCharacterTextarea";
 import { AppearenceGrid } from "./components/AppearenceGrid";
 import { CharacterHistory } from "./components/CharacterHistory";
 import { Triumph } from "./components/Triumph";
@@ -29,23 +29,21 @@ import { SpellsSection } from "./components/SpellsSection";
 import { api } from "../../../services/api";
 import { AuthContext } from "../../../contexts/auth";
 
-interface EditCharacterModalProps{
+interface CreateCharacterModalProps{
   isOpen: boolean
   onClose: () => void
   close: () => void
-  initialData: CharacterSheet
-  characterId: string
+  handleSubmit: (data: CharacterSheet) => void
 }
 
-export function EditCharacterModal({
+export function CharacterModal({
   isOpen,
   onClose,
   close,
-  initialData,
-  characterId
-}: EditCharacterModalProps){
-
+  handleSubmit
+}: CreateCharacterModalProps){
   const formRef = useRef(null)
+  
   
   const setAttributeAmplifier = useCallback((attributeName: string, attributeBased?: string) => {
     const currentProficiencyBonusValue = formRef.current.getFieldValue('generalAmplifiers.proficiencyBonus')
@@ -134,15 +132,6 @@ export function EditCharacterModal({
         )
   }, [])
       
-  async function handleSubmit(data: CharacterSheet) {
-
-    await api.put('/characters', {
-      id: characterId,
-      newData: data
-    })
-
-    close()
-  }
 
   return (
     <Modal
@@ -163,7 +152,9 @@ export function EditCharacterModal({
         <Form
           ref={formRef}
           onSubmit={handleSubmit}
-          initialData={initialData}
+          style={{
+            position: "relative"
+          }}
         >
           <Heading onRequestClose={onClose} />
 

@@ -1,7 +1,7 @@
 import { Scope } from "@unform/core";
 import { List } from "@chakra-ui/react";
 
-import { AttributesListItem } from "../components/AttributesListItem";
+import { AttributesListItem } from "./AttributesListItem";
 
 interface AttributesListProps{
   setAttributeAmplifier: (attributeName: string, attributeBased: string) => void
