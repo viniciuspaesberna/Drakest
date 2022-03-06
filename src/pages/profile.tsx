@@ -1,15 +1,11 @@
-import { useContext, useEffect, useState } from "react";
 import { GetServerSideProps } from "next";
-import { parseCookies } from "nookies";
-import { useRouter } from "next/router";
 import Head from "next/head";
-import { Flex, Text, Divider, useToast } from "@chakra-ui/react";
+import { Flex, Text, Divider } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 
 import { ProfileHeader, ProfileAside, CharacterSection } from "../components/layout/profile";
 import { CreateCharacterModal, Loading } from "../components/common";
 import { useLoding } from "../hooks/useLoding";
-import { AuthContext } from "../contexts/auth";
 import { getSession } from "next-auth/client";
 
 export default function Profile({ user }){
@@ -20,15 +16,6 @@ export default function Profile({ user }){
     return <Loading />;
   }
 
-  function onRequestClose() {
-    const isAccept = confirm("Ao fechar você perderá todos os dados, deseja fechar?")
-
-    if (isAccept) {
-      onClose()
-    }
-  }
-
-
   return (
     <>
       <Head>
@@ -37,7 +24,7 @@ export default function Profile({ user }){
 
       <CreateCharacterModal 
         isOpen={isOpen}
-        onClose={onRequestClose}
+        onClose={onClose}
       />
 
       <ProfileHeader user={user} />
@@ -45,10 +32,9 @@ export default function Profile({ user }){
       <Flex 
         as="main"
         maxW="1360px"
-        h="100%"
+        h="100vh"
         w="100%"
         m="auto"
-        mb="8"
         bg="gray.700"
         flexDir="column"
         rounded="md"

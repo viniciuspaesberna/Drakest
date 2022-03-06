@@ -10,6 +10,7 @@ import { AuthContext } from "../../../../contexts/auth";
 import { motion, Variants } from "framer-motion";
 import { CharacterCard } from "../../../common/CharacterCard";
 import { ConfirmModal } from "../../../common/ConfirmModal";
+import { useQuery } from "react-query";
 
 interface CharacterSectionProps{
   onOpen: () => void
@@ -33,21 +34,24 @@ export function CharacterSection({
   onOpen,
   user
 }: CharacterSectionProps){
-  const [characters, setCharacters] = useState([])
-
-  useEffect(() => {
-    getCharacters()
-  }, [])
-
-  async function getCharacters(){
-    const response = await api.get('characters', {
+  // const [characters, setCharacters] = useState([])
+  const { isLoading, isError, data, error, isFetching } = useQuery('characters', async () => {
+    return await api.get<any>('characters', {
       params: {
         email: user.email
       }, 
     })
+  })
 
-    setCharacters(response.data.characters)
-  }
+  // useEffect(() => {
+  //   getCharacters()
+  // }, [])
+
+  // async function getCharacters(){
+  //   const response = 
+
+  //   setCharacters(response.data.characters)
+  // }
 
   return (
     <Section
@@ -68,10 +72,19 @@ export function CharacterSection({
         mb="4"
         px="4"
         rounded="md"
+        position="relative"
       >
+        {isLoading && 
+          <Spinner 
+            position="absolute"
+            right="50%"
+            w="10"
+            h="10"
+          />
+        }
         <AddCharacterButton onOpen={onOpen} />
         {
-          characters.map(character => (
+          data?.data.characters.map((character: any) => (
             <CharacterCard 
               key={character.data.id}
               characterId={character.data.id}
@@ -94,7 +107,7 @@ export function CharacterSection({
           as={IoIosRefresh}
           w="6"
           h="6"
-          onClick={getCharacters}
+          // onClick={getCharacters}
           _hover={{
             transform: "scale(1.1)",
             cursor: 'pointer'

@@ -31,14 +31,12 @@ import { AuthContext } from "../../../contexts/auth";
 
 interface CreateCharacterModalProps{
   isOpen: boolean
-  onClose: () => void
   close: () => void
   handleSubmit: (data: CharacterSheet) => void
 }
 
 export function CharacterModal({
   isOpen,
-  onClose,
   close,
   handleSubmit
 }: CreateCharacterModalProps){
@@ -136,7 +134,7 @@ export function CharacterModal({
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={close}
     >
       <ModalOverlay bg="rgba(0, 0, 0, 0.6)" />
       <ModalContent
@@ -156,7 +154,7 @@ export function CharacterModal({
             position: "relative"
           }}
         >
-          <Heading onRequestClose={onClose} />
+          <Heading onRequestClose={close} />
 
           <Flex 
             mt="14"

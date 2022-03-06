@@ -1,5 +1,6 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
+import { useQueryClient } from "react-query";
 
 import { AuthContext } from "../../../contexts/auth";
 import { api } from "../../../services/api";
@@ -16,6 +17,7 @@ export function CreateCharacterModal({
   onClose,
 }){
   const { user } = useContext(AuthContext)
+  const queryClient = useQueryClient()
 
   async function handleSubmit(data: CharacterSheet) {
     await api.post('characters', {
@@ -25,6 +27,7 @@ export function CreateCharacterModal({
       }
     })
 
+    await queryClient.invalidateQueries(["characters"])
     onClose()
   }
 
@@ -39,8 +42,7 @@ export function CreateCharacterModal({
   return (
     <CharacterModal 
       isOpen={isOpen}
-      onClose={customClose}
-      close={onClose}
+      close={customClose}
       handleSubmit={handleSubmit}
     />
   )

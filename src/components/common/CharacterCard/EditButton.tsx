@@ -15,7 +15,7 @@ export function EditButton({
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   function onRequestClose() {
-    const isAccept = confirm("Ao fechar você perderá todos os dados, deseja fechar?")
+    const isAccept = confirm("Ao fechar os dados não serão atualizados, deseja fechar?")
 
     if (isAccept) {
       onClose()
