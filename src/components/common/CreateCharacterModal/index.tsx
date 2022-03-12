@@ -1,4 +1,3 @@
-import { useDisclosure } from "@chakra-ui/react";
 import { useContext } from "react";
 import { useQueryClient } from "react-query";
 
@@ -42,11 +41,7 @@ export function CreateCharacterModal({
   return (
     <CharacterModal 
       isOpen={isOpen}
-<<<<<<< HEAD
       onClose={customClose}
-=======
-      close={customClose}
->>>>>>> a5d9b9eb52d4b96dfa733593e2ac58750753f644
       handleSubmit={handleSubmit}
     />
   )
