@@ -14,14 +14,6 @@ export function EditButton({
 }: EditButtonProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  function onRequestClose() {
-    const isAccept = confirm("Ao fechar você perderá todos os dados, deseja fechar?")
-
-    if (isAccept) {
-      onClose()
-    }
-  }
-
   return (
     <>
       <Icon
@@ -37,8 +29,7 @@ export function EditButton({
 
       <EditCharacterModal 
         isOpen={isOpen}
-        onClose={onRequestClose}
-        close={onClose}
+        onClose={onClose}
         initialData={character}
         characterId={characterId}
       />

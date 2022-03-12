@@ -14,7 +14,7 @@ interface CreateCharacterModalProps{
 export function CreateCharacterModal({
   isOpen,
   onClose,
-}){
+}: CreateCharacterModalProps){
   const { user } = useContext(AuthContext)
 
   async function handleSubmit(data: CharacterSheet) {
@@ -40,7 +40,6 @@ export function CreateCharacterModal({
     <CharacterModal 
       isOpen={isOpen}
       onClose={customClose}
-      close={onClose}
       handleSubmit={handleSubmit}
     />
   )

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useContext } from "react";
+import React, { useRef, useCallback } from "react";
 import { Scope } from "@unform/core";
 import { Form } from "@unform/web";
 
@@ -26,21 +26,19 @@ import { CharacterHistory } from "./components/CharacterHistory";
 import { Triumph } from "./components/Triumph";
 import { SpellsSection } from "./components/SpellsSection";
 
-import { api } from "../../../services/api";
-import { AuthContext } from "../../../contexts/auth";
 
 interface CreateCharacterModalProps{
   isOpen: boolean
   onClose: () => void
-  close: () => void
   handleSubmit: (data: CharacterSheet) => void
+  initialData?: CharacterSheet
 }
 
 export function CharacterModal({
   isOpen,
   onClose,
-  close,
-  handleSubmit
+  handleSubmit,
+  initialData
 }: CreateCharacterModalProps){
   const formRef = useRef(null)
   
@@ -152,6 +150,7 @@ export function CharacterModal({
         <Form
           ref={formRef}
           onSubmit={handleSubmit}
+          initialData={initialData}
           style={{
             position: "relative"
           }}

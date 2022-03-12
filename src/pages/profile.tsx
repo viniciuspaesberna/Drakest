@@ -20,14 +20,6 @@ export default function Profile({ user }){
     return <Loading />;
   }
 
-  function onRequestClose() {
-    const isAccept = confirm("Ao fechar você perderá todos os dados, deseja fechar?")
-
-    if (isAccept) {
-      onClose()
-    }
-  }
-
 
   return (
     <>
@@ -37,7 +29,7 @@ export default function Profile({ user }){
 
       <CreateCharacterModal 
         isOpen={isOpen}
-        onClose={onRequestClose}
+        onClose={onClose}
       />
 
       <ProfileHeader user={user} />
