@@ -1,4 +1,14 @@
-import { Modal, ModalContent, ModalHeader, ModalOverlay, Text, ModalBody, ModalFooter, Flex, Button, HStack } from "@chakra-ui/react";
+import { 
+  Modal, 
+  ModalContent, 
+  ModalHeader, 
+  ModalOverlay, 
+  Text, 
+  ModalBody, 
+  ModalFooter, 
+  Button,
+  HStack 
+} from "@chakra-ui/react";
 
 interface ConfirmModalProps {
   isOpen: boolean

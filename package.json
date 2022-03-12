@@ -30,6 +30,7 @@
     "react-dropzone": "^11.4.2",
     "react-icons": "^4.2.0",
     "react-modal": "^3.14.3",
+    "react-query": "^3.34.16",
     "socket.io-client": "^4.2.0",
     "unform": "^1.2.3",
     "use-sound": "^4.0.1",
