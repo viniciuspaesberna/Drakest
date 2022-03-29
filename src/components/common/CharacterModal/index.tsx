@@ -31,14 +31,16 @@ interface CreateCharacterModalProps{
   isOpen: boolean
   onClose: () => void
   handleSubmit: (data: CharacterSheet) => void
-  initialData?: CharacterSheet
+  initialData?: CharacterSheet,
+  isLoading?: boolean
 }
 
 export function CharacterModal({
   isOpen,
   onClose,
   handleSubmit,
-  initialData
+  initialData=null,
+  isLoading
 }: CreateCharacterModalProps){
   const formRef = useRef(null)
   
@@ -134,7 +136,7 @@ export function CharacterModal({
   return (
     <Modal
       isOpen={isOpen}
-      onClose={close}
+      onClose={onClose}
     >
       <ModalOverlay bg="rgba(0, 0, 0, 0.6)" />
       <ModalContent
@@ -155,7 +157,7 @@ export function CharacterModal({
             position: "relative"
           }}
         >
-          <Heading onRequestClose={close} />
+          <Heading onRequestClose={onClose} isLoading={isLoading}/>
 
           <Flex 
             mt="14"

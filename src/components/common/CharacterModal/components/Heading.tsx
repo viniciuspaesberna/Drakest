@@ -5,10 +5,11 @@ import { FiSave } from 'react-icons/fi';
 import { IconButton, Heading as ChakraHeading, Flex } from '@chakra-ui/react';
 
 interface HeadingProps{
-  onRequestClose: () => void
+  onRequestClose: () => void,
+  isLoading:boolean
 }
 
-function Heading({onRequestClose}: HeadingProps){
+function Heading({onRequestClose, isLoading}: HeadingProps){
   return (
     <ChakraHeading
       display="flex"
@@ -32,6 +33,7 @@ function Heading({onRequestClose}: HeadingProps){
           }}
           aria-label="Salvar"
           icon={<FiSave />}
+          isLoading={isLoading}
         />
         
         <IconButton

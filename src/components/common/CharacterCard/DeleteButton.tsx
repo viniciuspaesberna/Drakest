@@ -1,5 +1,5 @@
 import { Icon, useDisclosure } from "@chakra-ui/react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 import { HiTrash } from "react-icons/hi"
 import { useQueryClient } from "react-query";
@@ -13,17 +13,21 @@ interface DeleteButtonProps{
 export function DeleteButton({
   characterId
 }: DeleteButtonProps) {
+  const [isLoading, setIsLoading] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const queryClient = useQueryClient()
 
   const deleteCharacter = useCallback(async () => {
+    setIsLoading(true)
     await api.delete("/characters", {
       data: {
         id: characterId
-      }
+      },
     })
 
+
     await queryClient.invalidateQueries(["characters"])
+    setIsLoading(false)
     onClose()
   }, [])
 
@@ -47,6 +51,7 @@ export function DeleteButton({
         onClose={onClose}
         text="Realmente deseja EXCLUIR esse personagem?"
         action={deleteCharacter}
+        isLoading={isLoading}
       />
     </>
   )

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useQueryClient } from "react-query";
 
 import { AuthContext } from "../../../contexts/auth";
@@ -15,10 +15,12 @@ export function CreateCharacterModal({
   isOpen,
   onClose,
 }: CreateCharacterModalProps){
+  const [isLoading, setIsLoading] = useState(false)
   const { user } = useContext(AuthContext)
   const queryClient = useQueryClient()
 
   async function handleSubmit(data: CharacterSheet) {
+    setIsLoading(true)
     await api.post('characters', {
       data: {
         user,
@@ -27,6 +29,7 @@ export function CreateCharacterModal({
     })
 
     await queryClient.invalidateQueries(["characters"])
+    setIsLoading(false)
     onClose()
   }
 
@@ -43,6 +46,7 @@ export function CreateCharacterModal({
       isOpen={isOpen}
       onClose={customClose}
       handleSubmit={handleSubmit}
+      isLoading={isLoading}
     />
   )
 }

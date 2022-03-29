@@ -32,7 +32,7 @@ export default function Profile({ user }){
       <Flex 
         as="main"
         maxW="1360px"
-        h="100vh"
+        minH="100vh"
         w="100%"
         m="auto"
         bg="gray.700"

@@ -15,13 +15,15 @@ interface ConfirmModalProps {
   onClose: () => void
   text: string
   action: () => void
+  isLoading: boolean
 }
 
 export function ConfirmModal({
   isOpen,
   onClose,
   text,
-  action
+  action,
+  isLoading
 }: ConfirmModalProps) {
 
   return (
@@ -57,6 +59,7 @@ export function ConfirmModal({
             <Button
               onClick={action}
               colorScheme="green"
+              isLoading={isLoading}
             >
               OK
             </Button>
