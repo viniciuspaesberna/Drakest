@@ -1,15 +1,22 @@
-import { Flex, IconButton, Text, Avatar} from "@chakra-ui/react";
+import { Flex, IconButton, Text, Avatar, useDisclosure} from "@chakra-ui/react";
 import { useState } from "react";
 import { BsFileText } from "react-icons/bs";
 import { Input } from "../../../common";
+import { EditCharacterModal } from "../../../common/EditCharacterModal";
 
 interface CharacterDatailsProps{
-  openCharacterSheet: () => void
+  characterId: string
+  characterSheet: CharacterSheet
 }
 
-export function CharacterDetails({openCharacterSheet}: CharacterDatailsProps){
+export function CharacterDetails({
+  characterId,
+  characterSheet
+}: CharacterDatailsProps){
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [detailsVisibility, setDetailsVisibility] = useState(false)
   const [hp, setHp] = useState('')
+
 
   return (
     <Flex
@@ -60,7 +67,7 @@ export function CharacterDetails({openCharacterSheet}: CharacterDatailsProps){
           </Flex>
 
           <IconButton
-            onClick={openCharacterSheet}
+            onClick={onOpen}
             colorScheme="yellow"
             aria-label="Ficha do personagem"
             icon={<BsFileText size="24"/>}
@@ -78,6 +85,13 @@ export function CharacterDetails({openCharacterSheet}: CharacterDatailsProps){
         src="https://github.com/HaloSara121.png"
         alt="HaloSara"
         title="HaloSara121"
+      />
+
+      <EditCharacterModal
+        onClose={onClose}
+        isOpen={isOpen}
+        characterId={characterId}
+        initialData={characterSheet}
       />
     </Flex>
   )

@@ -1,5 +1,5 @@
 import { useDisclosure } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { AuthContext } from "../../../contexts/auth";
 import { api } from "../../../services/api";
@@ -19,8 +19,10 @@ export function EditCharacterModal({
   characterId,
   initialData
 }: EditCharacterModalProps){
+  const [isLoading, setIsLoading] = useState(false)
 
   async function handleSubmit(data: CharacterSheet) {
+    setIsLoading(true)
     await api.put('characters', {
       data: {
         id: characterId,
@@ -28,6 +30,7 @@ export function EditCharacterModal({
       }
     })
 
+    setIsLoading(false)
     onClose()
   }
 
@@ -45,6 +48,7 @@ export function EditCharacterModal({
       onClose={customClose}
       handleSubmit={handleSubmit}
       initialData={initialData}
+      isLoading={isLoading}
     />
   )
 }

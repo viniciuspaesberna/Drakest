@@ -34,7 +34,6 @@ export function CharacterSection({
   onOpen,
   user
 }: CharacterSectionProps){
-  // const [characters, setCharacters] = useState([])
   const { isLoading, isError, data, error, isFetching } = useQuery('characters', async () => {
     return await api.get<any>('characters', {
       params: {
@@ -42,16 +41,6 @@ export function CharacterSection({
       }, 
     })
   })
-
-  // useEffect(() => {
-  //   getCharacters()
-  // }, [])
-
-  // async function getCharacters(){
-  //   const response = 
-
-  //   setCharacters(response.data.characters)
-  // }
 
   return (
     <Section
@@ -107,7 +96,6 @@ export function CharacterSection({
           as={IoIosRefresh}
           w="6"
           h="6"
-          // onClick={getCharacters}
           _hover={{
             transform: "scale(1.1)",
             cursor: 'pointer'
