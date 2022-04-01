@@ -1,4 +1,4 @@
-import { Flex, Text, Stack, CircularProgress } from "@chakra-ui/react";
+import { Flex, Text, Stack } from "@chakra-ui/react";
 import { Scope } from "@unform/core";
 import { CreateCharacterTextarea } from "../CreateCharacterTextarea";
 import { ImagePreview } from "./ImagePreview";

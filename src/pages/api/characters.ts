@@ -43,7 +43,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if(req.method === "GET") {
-    const { email, single } = req.query
+    const { email } = req.query
 
 
     const charactersRefs = await fauna.query<any>(
@@ -112,13 +112,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       )
     )
 
-
     const putRes = await fauna.query(
       q.Update(
         character.ref,
-        { 
-          data: newData
-        } 
+        newData
       ),
     )
 

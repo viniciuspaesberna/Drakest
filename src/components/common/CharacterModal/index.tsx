@@ -134,7 +134,7 @@ export function CharacterModal({
   return (
     <Modal
       isOpen={isOpen}
-      onClose={close}
+      onClose={onClose}
     >
       <ModalOverlay bg="rgba(0, 0, 0, 0.6)" />
       <ModalContent
@@ -155,7 +155,7 @@ export function CharacterModal({
             position: "relative"
           }}
         >
-          <Heading onRequestClose={close} />
+          <Heading onRequestClose={onClose} />
 
           <Flex 
             mt="14"
