@@ -17,19 +17,6 @@ interface CharacterSectionProps{
   user: User
 }
 
-const rotateVariants: Variants = {
-  rotate: {
-    rotate: [0, 1],
-    transition: {
-      rotate: {
-        duration: .5,
-        type: "spring",
-        ease: "easeInOut",
-      },
-    }
-  },
-}
-
 export function CharacterSection({
   onOpen,
   user
@@ -78,6 +65,7 @@ export function CharacterSection({
               key={character.data.id}
               characterId={character.data.id}
               character={character.data.characterSheet}
+              editable
             />
           ))
         }

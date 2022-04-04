@@ -1,4 +1,5 @@
 import { 
+  Box,
   Button, 
   IconButton, 
   Modal, 
@@ -11,10 +12,12 @@ import {
   Spinner, 
   Text 
 } from "@chakra-ui/react";
-import { useContext } from "react";
+import { Flex } from "chakra-ui";
+import { useContext, useState } from "react";
 import { CgClose } from "react-icons/cg";
 import { useQuery } from "react-query";
 import { AuthContext } from "../../../../contexts/auth";
+import { RoomContext } from "../../../../contexts/RoomContext";
 import { api } from "../../../../services/api";
 import { CharacterCard } from "../../../common/CharacterCard";
 
@@ -27,8 +30,10 @@ export function CharacterSelectionModal({
   onClose,
   isOpen,
 }: CharacterSelectionModalProps) {
+  const [characterSelected, setCharacterSelected] = useState<Character>()
+  const { setSelectedCharacter } = useContext(RoomContext)
   const { user } = useContext(AuthContext)
-  const { isLoading, isError, data, error, isFetching } = useQuery('characters', async () => {
+  const { isLoading, isError, data, error } = useQuery('characters', async () => {
     return await api.get<any>('characters', {
       params: {
         email: user.email
@@ -71,31 +76,42 @@ export function CharacterSelectionModal({
           <SimpleGrid
             templateColumns="1fr 1fr 1fr"
             w="100%"
+            gap="8"
             position="relative"
           >
-            {isLoading && 
+            {/* {isLoading && 
               <Spinner 
                 position="absolute"
                 right="50%"
                 w="10"
                 h="10"
               />
-            }
+            } */}
             {
               data?.data.characters.map((character: any) => (
-                <CharacterCard
-                  key={character.data.id}
-                  characterId={character.data.id}
-                  character={character.data.characterSheet}
-                />
+                <Box
+                  onClick={() => setCharacterSelected(character.data.id)}
+                  cursor="pointer"
+                >
+                  <CharacterCard 
+                    key={character.data.id}
+                    characterId={character.data.id}
+                    character={character.data.characterSheet}
+                    selectedId={characterSelected}
+                  />
+                </Box>
               ))
-            }
+            } 
           </SimpleGrid>
         </ModalBody>
-
+ 
         <ModalFooter>
           <Button
             colorScheme="green"
+            onClick={() => {
+              setSelectedCharacter(characterSelected)
+              onClose()
+            }}
           >
             Selecionar
           </Button>

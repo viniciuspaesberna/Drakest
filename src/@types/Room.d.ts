@@ -3,3 +3,8 @@ declare type Room = {
   name: string 
   room_owner: string
 }
+
+ declare type Character = {
+  id: string
+  sheet: CharacterSheet
+}

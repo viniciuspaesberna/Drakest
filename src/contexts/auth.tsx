@@ -16,6 +16,10 @@ export function AuthProvider({ children }: AuthProviderProps){
   const [user, setUser] = useState<User | null>(null)
   const [session, loading] = useSession()
 
+  useEffect(() => {
+    const newUser = JSON.parse(localStorage.getItem("@Auth:currentUser"))
+    setUser(newUser)
+  }, [])
   
   useEffect(() => {
     if(session && !loading){
@@ -26,10 +30,6 @@ export function AuthProvider({ children }: AuthProviderProps){
     }
   }, [session])
   
-  useEffect(() => {
-    const newUser = JSON.parse(localStorage.getItem("@Auth:currentUser"))
-    setUser(newUser)
-  }, [])
 
   function customSignOut() {
     signOut()

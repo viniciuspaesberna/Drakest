@@ -9,11 +9,15 @@ import { EditButton } from "./EditButton";
 interface CharacterCardProps{
   character: CharacterSheet
   characterId: string
+  editable?: boolean
+  selectedId?: any
 }
 
 export function CharacterCard({
   character,
-  characterId
+  characterId,
+  editable,
+  selectedId
 }: CharacterCardProps) {
 
   return (
@@ -21,26 +25,29 @@ export function CharacterCard({
       display="flex"
       flexDir="column"
       align="center"
-      bg="gray.700"
+      bg={selectedId === characterId ? "gray.600" : "gray.700"}
+      border={selectedId === characterId ? "1px solid green" : "none"}
       rounded="md"
     >
-      <HStack
-        w="100%"
-        h="2"
-        py="2"
-        px="2"
-        align="flex-start"
-        justify="flex-end"
-      >
-        <EditButton 
-          character={character}
-          characterId={characterId}
-        />
+      {editable && (
+        <HStack
+          w="100%"
+          h="2"
+          py="2"
+          px="2"
+          align="flex-start"
+          justify="flex-end"
+        >
+          <EditButton 
+            character={character}
+            characterId={characterId}
+          />
 
-        <DeleteButton 
-          characterId={characterId}
-        />
-      </HStack>
+          <DeleteButton 
+            characterId={characterId}
+          />
+        </HStack>
+      )}
 
       <Avatar 
         src="/images/defaultCharacter2.png" 

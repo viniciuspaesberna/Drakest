@@ -54,14 +54,14 @@ export function CharacterDetails({
           mr="4"
         >
           <Flex ml="4" flex="1" flexDir="column" >
-            <Text fontSize="xl" ml="2">HaloSara121</Text>
+            <Text fontSize="xl" ml="2">{characterSheet?.infos.name}</Text>
             <Input
               name="hp"
               type="number"
               placeholder="hp"
               _placeholder={{color:"gray.600"}}
               w="10" 
-              value={hp}
+              value={characterSheet?.attributesSummary.hpInfos.hp}
               onChange={e => setHp(e.target.value)}
             />
           </Flex>

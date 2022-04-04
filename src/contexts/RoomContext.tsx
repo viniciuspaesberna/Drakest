@@ -5,28 +5,31 @@ interface RoomProviderProps{
 }
 
 interface RoomContextData{
-  selectedCharacter: boolean
+  selectedCharacter: Character
   characters: Character[]
   setCharacters: (characters: Character[]) => void
-}
-
-type Character = {
-  id: string
-  sheet: CharacterSheet
+  setSelectedCharacter: (character: Character) => void
 }
 
 export const RoomContext = createContext({} as RoomContextData)
 
 export function RoomProvider({children}: RoomProviderProps){
   const [characters, setCharacters] = useState<Character[]>([])
-  const [selectedCharacter, setSelectedCharacter] = useState(false)
+  const [selectedCharacter, setSelectedCharacter] = useState<Character>()
+
+  useEffect(() => {
+    if ( selectedCharacter) {
+      setCharacters([...characters, selectedCharacter])
+    }
+  }, [selectedCharacter])
 
   return (
     <RoomContext.Provider
       value={{
         selectedCharacter,
         characters,
-        setCharacters
+        setCharacters,
+        setSelectedCharacter
       }}
     >
       {children}
