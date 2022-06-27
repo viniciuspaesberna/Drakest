@@ -1,13 +1,13 @@
-import { Box, ChakraProvider } from '@chakra-ui/react'
-
+import { QueryClientProvider } from 'react-query'
 import { AppProps } from 'next/app'
 import { getSession, Provider } from 'next-auth/client'
 import { Provider as ReduxProvider } from 'react-redux'
 
+import { Box, ChakraProvider } from '@chakra-ui/react'
+
 import { AuthProvider } from '../contexts/auth'
 import { theme } from '../styles/theme'
 import { global } from '../styles/global'
-import { QueryClientProvider } from 'react-query'
 import { queryClient } from '../services/queryClient'
 import store from '../store'
 

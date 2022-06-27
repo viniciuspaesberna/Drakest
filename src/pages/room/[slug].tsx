@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
-import { GetServerSideProps } from "next";
+import { useEffect, useState } from 'react'
 import Head from "next/head";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { getSession } from "next-auth/client";
 
-import { Flex, Image, useDisclosure, VStack } from "@chakra-ui/react";
+import { Flex, useDisclosure } from "@chakra-ui/react";
 
 import { Aside, Characters, CharacterSheetModal, RoomHeader } from "../../components/layout/room";
 import { Loading } from "../../components/common/Loading";
@@ -93,7 +93,7 @@ export default function Room({ roomId }){
               {/* <Image src="/images/bg.png"/> */}
             </Flex>
 
-            <Characters openCharacterSheet={onOpen} />
+            <Characters />
           </Flex>
         </Flex>
       </DicesProvider>

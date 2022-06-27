@@ -2,18 +2,12 @@ import { GetServerSideProps } from 'next'
 import { parseCookies } from 'nookies'
 import Head from 'next/head'
 
-import { Flex, Image, Stack, Text } from '@chakra-ui/react'
+import { Flex, Image, Stack } from '@chakra-ui/react'
 
-import { Loading } from '../components/common'
-import { HomeHeader, JoinRoomForm, CreateRoomForm, Aside } from '../components/layout/home'
-import { useLoding } from '../hooks/useLoding'
+import { HomeHeader, JoinRoomForm, CreateRoomForm } from '../components/layout/home'
 
 export default function Home() {
-  const { isLoading } = useLoding()
 
-  if(isLoading){    
-    return <Loading />;
-  }
 
   return (
     <>
@@ -25,12 +19,9 @@ export default function Home() {
       
       <Flex 
         as="main"
-        display="flex"
         h="85vh"
         justify="center"
-      >
-        {/* <Aside /> */}
-    
+      >    
         <Flex
           align="center"
           flexDir="column"

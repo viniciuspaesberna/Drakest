@@ -1,12 +1,13 @@
-import { GetServerSideProps } from "next";
 import Head from "next/head";
-import { Flex, Text, Divider } from "@chakra-ui/react";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/client";
 import { useDisclosure } from "@chakra-ui/react";
+
+import { Flex, Text, Divider } from "@chakra-ui/react";
 
 import { ProfileHeader, ProfileAside, CharacterSection } from "../components/layout/profile";
 import { CreateCharacterModal, Loading } from "../components/common";
 import { useLoding } from "../hooks/useLoding";
-import { getSession } from "next-auth/client";
 
 export default function Profile({ user }){
   const { isLoading } = useLoding()
@@ -70,8 +71,8 @@ export default function Profile({ user }){
   )
 } 
 
-export const getServerSideProps: GetServerSideProps = async ({req, params}) => {
-  const session = await getSession({req})   
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const session = await getSession({ req })   
 
   if(!session) {
     return {

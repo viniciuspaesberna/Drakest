@@ -39,19 +39,19 @@ export function JoinRoomForm(){
         setIsloading(true)
         const isAbleToJoinRoom = await RoomService.joinGameRoomRequest(socket, roomId)
 
-        setInterval(() => {
-          if (!isAbleToJoinRoom) {
-            setIsloading(false)
+        // setInterval(() => {
+        //   if (!isAbleToJoinRoom) {
+        //     setIsloading(false)
   
-            toast({
-              duration: 3500,
-              title: 'Erro',
-              status: 'error',
-              description: "Tempo excedido!",
-              isClosable: true
-            })
-          }
-        }, 2000)
+        //     toast({
+        //       duration: 3500,
+        //       title: 'Erro',
+        //       status: 'error',
+        //       description: "Tempo excedido!",
+        //       isClosable: true
+        //     })
+        //   }
+        // }, 2000)
 
         if (isAbleToJoinRoom){
           setIsloading(false)
