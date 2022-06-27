@@ -19,7 +19,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [ ] Criação de salas
 - [ ] Interface das salas para facilitar a jogabilidade
 
-## ☕ Usando <nome_do_projeto>
+## ☕ Usando Drakest
 
 Para usar Drakest, siga estas etapas:
 
