@@ -6,7 +6,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-<img src="exemplo-image.png" alt="exemplo imagem">
+<img src="https://media.graphassets.com/DjnuWw5sTxmGr4UCTbDZ" alt="Drakest pagina inicial">
 
 > Esse projeto se trata de um site, com o intuito de ajudar pessoas a jogarem RPG de mesa mais especificamente Dangeons and Dragons.
 
