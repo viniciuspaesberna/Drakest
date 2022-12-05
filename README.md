@@ -8,7 +8,7 @@
 
 <img src="https://media.graphassets.com/DjnuWw5sTxmGr4UCTbDZ" alt="Drakest pagina inicial">
 
-> Esse projeto se trata de um site, com o intuito de ajudar pessoas a jogarem RPG de mesa mais especificamente Dangeons and Dragons.
+> Esse projeto se trata de um site, com o intuito de ajudar pessoas a jogarem RPG de mesa mais especificamente Dungeons & Dragons.
 
 ### Ajustes e melhorias
 
